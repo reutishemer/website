@@ -49,7 +49,7 @@ html, body {
   transition: transform var(--transition), box-shadow var(--transition);
 }
 .logo-circle:hover { transform: scale(1.1) rotate(-5deg); box-shadow: 0 14px 36px rgba(26,58,74,0.3); }
-.logo-circle img { width: 100%; height: 100%; object-fit: contain; }
+.logo-circle img { width: 200%; height: 200%; object-fit: contain; }
 
 /* ═══════════════════════════════
    SCROLL SNAP
@@ -285,7 +285,7 @@ html, body {
 
 .logo-menu {
   position: absolute;
-  right: 110%; /* דוחף את התפריט שמאלה מהלוגו */
+  right: 130%; /* דוחף את התפריט שמאלה מהלוגו */
   display: flex;
   gap: 1.5rem;
   background: rgba(255, 255, 255, 0.95);
