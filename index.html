@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>יחידת שה"ד 339</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- Fixed Nav Logo -->
+  <nav class="nav-logo">
+    <div class="logo-wrapper">
+      <a href="index.html" class="logo-circle">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/IAF_logo.svg/1024px-IAF_logo.svg.png" alt="לוגו" />
+      </a>
+      
+      <div class="logo-menu">
+        <a href="products.html" class="menu-item">תוצרים</a>
+        <a href="#footer" class="menu-item" id="contactLink">צור קשר</a>
+        <button class="menu-item" id="adminLoginBtn">כניסת מנהלים</button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h3>כניסת מנהלים</h3>
+      <input type="text" id="adminUser" placeholder="שם משתמש" />
+      <input type="password" id="adminPass" placeholder="סיסמה" />
+      <div class="modal-btns">
+        <button id="doLogin">התחבר</button>
+        <button id="closeModal">ביטול</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-snap-container">
+
+    <!-- ═══ HERO ═══ -->
+    <section class="snap-section hero-section">
+      <div class="hero-bg">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="רקע" class="hero-img" />
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-bottom">
+        <div class="hero-wave-wrap">
+          <svg class="hero-wave" viewBox="0 0 1200 600" preserveAspectRatio="none">
+            <path d="M0,150 C300,0 900,300 1200,50 L1200,600 L0,600 Z" fill="#1a3a4a"></path>
+          </svg>
+        </div>
+        <div class="hero-title-block reveal">
+          <h1 class="hero-h1">יחידת שה"ד 339</h1>
+          <div class="hero-divider"></div>
+          <h2 class="hero-h2">מרכז מצוינות הדרכתית</h2>
+          <p class="hero-p">
+            היחידה האחראית על ייצור עזרי ההדרכה המתוחכמים ביותר בחיל האוויר.
+            אצלנו יוצרים תוכן שמשנה את פני הלמידה והמבצעיות של החיל כולו.
+          </p>
+        </div>
+      </div>
+      <div class="scroll-chevron" id="scrollChevron">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ═══ SECTION ROWS ═══ -->
+    <div id="firstRow">
+      <section class="snap-section section-card-wrap">
+        <!-- לחיצה מכאן תעביר לעמוד תוצרים ותקפיץ לסרטים -->
+        <div class="section-card reveal" onclick="window.location.href='products.html#section-movies'">
+          <div class="section-card-img">
+            <img src="https://picsum.photos/id/250/1200/800" alt="סרטים" />
+            <div class="section-card-img-overlay"></div>
+          </div>
+          <div class="section-card-body">
+            <h3 class="section-card-title">סרטים</h3>
+            <p class="section-card-desc">יחידת שה"ד, שירות ההדרכה של חיל האוויר, האחראית על ייצור עזרי ההדרכה המתוחכמים ביותר.</p>
+            <div class="section-card-cta"><span>צפייה בתוצרים</span><div class="cta-line"></div></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div>
+      <section class="snap-section section-card-wrap reversed">
+        <div class="section-card reveal" onclick="window.location.href='products.html#section-animation'">
+          <div class="section-card-img">
+            <img src="https://picsum.photos/id/201/1200/800" alt="אנימציה" />
+            <div class="section-card-img-overlay"></div>
+          </div>
+          <div class="section-card-body">
+            <h3 class="section-card-title">אנימציה</h3>
+            <p class="section-card-desc">הנפשה מתקדמת המשלבת טכניקות קלאסיות ומודרניות להעברת מסרים מורכבים בצורה פשוטה וחווייתית.</p>
+            <div class="section-card-cta"><span>צפייה בתוצרים</span><div class="cta-line"></div></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div>
+      <section class="snap-section section-card-wrap">
+        <div class="section-card reveal" onclick="window.location.href='products.html#section-graphics'">
+          <div class="section-card-img">
+            <img src="https://picsum.photos/id/203/1200/800" alt="גרפיקה" />
+            <div class="section-card-img-overlay"></div>
+          </div>
+          <div class="section-card-body">
+            <h3 class="section-card-title">גרפיקה</h3>
+            <p class="section-card-desc">עיצוב ויזואלי המשלב אסתטיקה ופונקציונליות עבור צרכי המבצעיות וההדרכה של החיל.</p>
+            <div class="section-card-cta"><span>צפייה בתוצרים</span><div class="cta-line"></div></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ═══ HOW THE MAGIC HAPPENS ═══ -->
+    <section class="snap-section magic-section">
+      <h2 class="magic-title reveal">אז... איך הקסם קורה?</h2>
+      <div class="magic-steps">
+        <div class="magic-path-wrap" aria-hidden="true">
+          <svg class="magic-path" viewBox="0 0 1000 2400" preserveAspectRatio="none">
+            <path d="M 750,300 C 750,600 250,600 250,900 C 250,1200 750,1200 750,1500 C 750,1800 250,1800 250,2100"
+              fill="none" stroke="#1a3a4a" stroke-width="6" stroke-dasharray="20,20" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="magic-step reveal" data-side="right">
+          <div class="magic-step-inner">
+            <div class="magic-img-wrap">
+              <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="שלב 1" />
+              <div class="magic-img-hover"><p>בשלב הזה נפגשים... הכל מתחיל מרעיון קטן וחלום גדול. אנחנו כאן כדי להפוך אותו למציאות ויזואלית מדהימה.</p></div>
+            </div>
+            <h4 class="magic-step-title">שיחת אפיון מול שה״ד 339</h4>
+          </div>
+        </div>
+        <div class="magic-step reveal" data-side="left">
+          <div class="magic-step-inner">
+            <div class="magic-img-wrap">
+              <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="שלב 2" />
+              <div class="magic-img-hover"><p>הצוותים המקצועיים שלנו מעבדים את הצורך לתוצרים ויזואליים מדויקים - סרטים, אנימציה או גרפיקה מבצעית.</p></div>
+            </div>
+            <h4 class="magic-step-title">תהליך הפקה ויצירה</h4>
+          </div>
+        </div>
+        <div class="magic-step reveal" data-side="right">
+          <div class="magic-step-inner">
+            <div class="magic-img-wrap">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="שלב 3" />
+              <div class="magic-img-hover"><p>אחרי עבודת צוות קפדנית, התוצר עובר ליחידה. הדיוק, האיכות והמסר עוברים בצורה הטובה ביותר.</p></div>
+            </div>
+            <h4 class="magic-step-title">תוצר מוגמר ומרשים</h4>
+          </div>
+        </div>
+        <div class="magic-step reveal" data-side="left">
+          <div class="magic-step-inner">
+            <div class="magic-img-wrap">
+              <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="שלב 4" />
+              <div class="magic-img-hover"><p>התוצר מוטמע במערכות היחידה ומשפר את יכולות ההדרכה והמבצעיות בשטח בזמן אמת.</p></div>
+            </div>
+            <h4 class="magic-step-title">מסירה והטמעה</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="snap-section site-footer">
+      <div class="footer-wave-wrap" aria-hidden="true">
+        <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
+          <path d="M0,15 C300,-15 900,30 1200,0 L1200,50 L0,50 Z" fill="#1a3a4a"></path>
+        </svg>
+      </div>
+      <div class="footer-inner">
+        <div class="footer-text">
+          <h3 class="footer-h3">אם הגעתם עד לפה...</h3>
+          <button class="footer-cta" onclick="window.location.href='products.html#section-movies'">
+            <span>לא משנה מתי... רק תגידו!</span>
+            <span class="footer-arrow">&#8592;</span>
+          </button>
+          <p class="footer-email">shachad339@iaf.gov.il</p>
+        </div>
+        <div class="footer-logo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/IAF_logo.svg/1024px-IAF_logo.svg.png" alt="לוגו" />
+        </div>
+      </div>
+      <div class="footer-copy">
+        <div class="footer-copy-line"></div>
+        <p>כל התכנים מוגנים בזכויות יוצרים &bull; מרכז מצוינות הדרכתית - חיל האוויר &bull; שה"ד &copy; 2025</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>תוצרים | יחידת שה"ד 339</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="products.css" />
+</head>
+<body>
+
+  <!-- ══ Fixed Nav Logo ══ -->
+  <!-- Fixed Nav Logo -->
+  <nav class="nav-logo">
+  <div class="logo-wrapper">
+    <a href="index.html" class="logo-circle">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/IAF_logo.svg/1024px-IAF_logo.svg.png" alt="לוגו" />
+    </a>
+    
+    <div class="logo-menu">
+      <a href="products.html" class="menu-item">תוצרים</a>
+      <a href="#footer" class="menu-item" id="contactLink">צור קשר</a>
+      <button class="menu-item" id="adminLoginBtn">כניסת מנהלים</button>
+    </div>
+  </div>
+</nav>
+
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h3>כניסת מנהלים</h3>
+      <input type="text" id="adminUser" placeholder="שם משתמש" />
+      <input type="password" id="adminPass" placeholder="סיסמה" />
+      <div class="modal-btns">
+        <button id="doLogin">התחבר</button>
+        <button id="closeModal">ביטול</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ Sticky Top Bar ══ -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+
+      <!-- <div class="top-bar-right">
+        <a href="index.html" class="back-link">
+          <span class="back-arrow">&#8592;</span>
+          <span>חזרה לבית</span>
+        </a>
+        <h1 class="top-bar-title">תוצרים</h1>
+      </div> -->
+
+      <!-- <div class="top-bar-center">
+        <a class="jump-link" href="#section-movies">סרטים</a>
+        <a class="jump-link" href="#section-animation">אנימציה</a>
+        <a class="jump-link" href="#section-graphics">גרפיקה</a>
+      </div> -->
+
+      <div class="top-bar-left">
+        <div class="search-wrap">
+          <span class="search-icon">&#128269;</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="חיפוש..." />
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ══ Hero Banner ══ -->
+  <section class="products-hero">
+    <div class="products-hero-bg"></div>
+    <div class="products-hero-content">
+      <h2 class="products-hero-title">ארכיון התוצרים</h2>
+      <p class="products-hero-sub">סרטים · אנימציה · גרפיקה</p>
+    </div>
+  </section>
+
+  <!-- ══ Filter Bar ══ -->
+  <div class="filter-bar" id="filterBar">
+    <div class="filter-bar-inner">
+      <span class="filter-label-text">סינון:</span>
+      <div class="filter-chips-wrap" id="filterChips">
+        <button class="fchip active" data-filter="all">הכל</button>
+        <button class="fchip" data-filter="סרטון">סרטון</button>
+        <button class="fchip" data-filter="סרט">סרט</button>
+        <button class="fchip" data-filter="תיעוד">תיעוד</button>
+        <button class="fchip" data-filter="דו-מימד">דו-מימד</button>
+        <button class="fchip" data-filter="תלת-מימד">תלת-מימד</button>
+        <button class="fchip" data-filter="קלאסי">קלאסי</button>
+        <button class="fchip" data-filter="פוסטר">פוסטר</button>
+        <button class="fchip" data-filter="לוגו">לוגו</button>
+        <button class="fchip" data-filter="UX/UI">UX/UI</button>
+      </div>
+      <span class="filter-count" id="filterCount">מציג הכל</span>
+    </div>
+
+    
+    <!-- <div class="top-bar-left">
+        <div class="search-wrap">
+          <span class="search-icon">&#128269;</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="חיפוש..." />
+        </div>
+    </div> -->
+
+  </div>
+
+  <!-- ══ Main Content ══ -->
+  <main class="main-wrap">
+
+    <!-- ── MOVIES ── -->
+    <section class="category-section" id="section-movies">
+      <div class="category-header">
+        <div class="category-header-line"></div>
+        <div class="category-header-text">
+          <span class="category-number">01</span>
+          <h2 class="category-title">סרטים</h2>
+          <p class="category-desc">יחידת שה"ד האחראית על ייצור עזרי ההדרכה המתוחכמים ביותר בחיל האוויר.</p>
+        </div>
+      </div>
+      <div class="products-grid" id="grid-movies"></div>
+    </section>
+
+    <!-- ── ANIMATION ── -->
+    <section class="category-section" id="section-animation">
+      <div class="category-header">
+        <div class="category-header-line"></div>
+        <div class="category-header-text">
+          <span class="category-number">02</span>
+          <h2 class="category-title">אנימציה</h2>
+          <p class="category-desc">הנפשה מתקדמת המשלבת טכניקות קלאסיות ומודרניות להעברת מסרים מורכבים.</p>
+        </div>
+      </div>
+      <div class="products-grid" id="grid-animation"></div>
+    </section>
+
+    <!-- ── GRAPHICS ── -->
+    <section class="category-section" id="section-graphics">
+      <div class="category-header">
+        <div class="category-header-line"></div>
+        <div class="category-header-text">
+          <span class="category-number">03</span>
+          <h2 class="category-title">גרפיקה</h2>
+          <p class="category-desc">עיצוב ויזואלי המשלב אסתטיקה ופונקציונליות עבור צרכי המבצעיות וההדרכה.</p>
+        </div>
+      </div>
+      <div class="products-grid" id="grid-graphics"></div>
+    </section>
+
+    <!-- Empty State -->
+    <div class="empty-state hidden" id="emptyState">
+      <div class="empty-icon">&#128269;</div>
+      <p class="empty-text">לא נמצאו תוצרים התואמים את החיפוש</p>
+      <button class="clear-btn" id="clearBtn">נקה חיפוש</button>
+    </div>
+
+  </main>
+
+  <!-- ══ Footer ══ -->
+  <footer class="page-footer">
+    <p>כל התכנים מוגנים בזכויות יוצרים &bull; מרכז מצוינות הדרכתית - חיל האוויר &bull; שה"ד &copy; 2025</p>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>
