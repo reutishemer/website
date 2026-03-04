@@ -7,7 +7,7 @@
 /* ─────────────────────────────────────────
    DATA
 ───────────────────────────────────────── */
-const PRODUCTS = [
+let PRODUCTS = [
   // Movies
   { id: 'm1', category: 'movies',    title: 'חיסול הטרור',     unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: 'https://picsum.photos/id/1/600/400' },
   { id: 'm2', category: 'movies',    title: 'חיבוק ברזל',      unit: 'פיקוד העורף',  type: 'סרט',      imageUrl: 'https://picsum.photos/id/2/600/400' },
@@ -50,12 +50,15 @@ function initScrollReveal() {
 function initScrollChevron() {
   const chevron = document.getElementById('scrollChevron');
   if (!chevron) return;
+
   chevron.addEventListener('click', () => {
-    const container = document.querySelector('.scroll-snap-container');
-    const target    = document.getElementById('firstRow');
-    if (container && target) container.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+    const target = document.getElementById('firstRow');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
   });
 }
+
 
 /* ─────────────────────────────────────────
    PRODUCTS PAGE (NEW: dropdown + multi-select + search in filter bar)
@@ -234,7 +237,7 @@ function initProductsPage() {
           </div>
         </div>
         <div class="card-footer">
-          <span>יחידה מבצעת: ${product.unit}</span>
+          <span>${product.unit}</span>
           <span class="card-dot"></span>
         </div>
       </div>
