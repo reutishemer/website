@@ -56,12 +56,12 @@
         <a class="jump-link" href="#section-graphics">גרפיקה</a>
       </div> -->
 
-      <div class="top-bar-left">
+      <!-- <div class="top-bar-left">
         <div class="search-wrap">
           <span class="search-icon">&#128269;</span>
           <input type="text" id="searchInput" class="search-input" placeholder="חיפוש..." />
         </div>
-      </div>
+      </div> -->
 
     </div>
   </header>
@@ -75,35 +75,56 @@
     </div>
   </section>
 
-  <!-- ══ Filter Bar ══ -->
+
   <div class="filter-bar" id="filterBar">
-    <div class="filter-bar-inner">
+  <div class="filter-bar-inner filter-bar-row">
+
+    <!-- RIGHT: Filter -->
+    <div class="filter-right">
       <span class="filter-label-text">סינון:</span>
-      <div class="filter-chips-wrap" id="filterChips">
-        <button class="fchip active" data-filter="all">הכל</button>
-        <button class="fchip" data-filter="סרטון">סרטון</button>
-        <button class="fchip" data-filter="סרט">סרט</button>
-        <button class="fchip" data-filter="תיעוד">תיעוד</button>
-        <button class="fchip" data-filter="דו-מימד">דו-מימד</button>
-        <button class="fchip" data-filter="תלת-מימד">תלת-מימד</button>
-        <button class="fchip" data-filter="קלאסי">קלאסי</button>
-        <button class="fchip" data-filter="פוסטר">פוסטר</button>
-        <button class="fchip" data-filter="לוגו">לוגו</button>
-        <button class="fchip" data-filter="UX/UI">UX/UI</button>
+
+      <div class="filter-dropdown" id="filterDropdown">
+        <button class="filter-trigger" id="filterTrigger" type="button" aria-expanded="false">
+          <span class="filter-trigger-text" id="filterTriggerText">הכל</span>
+          <span class="filter-trigger-icon">▾</span>
+        </button>
+
+        <div class="filter-panel hidden" id="filterPanel">
+          <div class="filter-panel-head">
+            <span class="filter-panel-title">בחרי סוגי תוצר</span>
+            <button class="filter-clear" id="filterClear" type="button">נקה</button>
+          </div>
+
+          <div class="filter-options" id="filterOptions">
+            <!-- Multi-select buttons -->
+            <button class="fopt active" type="button" data-filter="סרטון">סרטון</button>
+            <button class="fopt active" type="button" data-filter="סרט">סרט</button>
+            <button class="fopt active" type="button" data-filter="תיעוד">תיעוד</button>
+            <button class="fopt active" type="button" data-filter="דו-מימד">דו-מימד</button>
+            <button class="fopt active" type="button" data-filter="תלת-מימד">תלת-מימד</button>
+            <button class="fopt active" type="button" data-filter="קלאסי">קלאסי</button>
+            <button class="fopt active" type="button" data-filter="פוסטר">פוסטר</button>
+            <button class="fopt active" type="button" data-filter="לוגו">לוגו</button>
+            <button class="fopt active" type="button" data-filter="UX/UI">UX/UI</button>
+          </div>
+        </div>
       </div>
+
       <span class="filter-count" id="filterCount">מציג הכל</span>
     </div>
 
-    
-    <!-- <div class="top-bar-left">
-        <div class="search-wrap">
-          <span class="search-icon">&#128269;</span>
-          <input type="text" id="searchInput" class="search-input" placeholder="חיפוש..." />
-        </div>
-    </div> -->
+    <!-- LEFT: Search -->
+    <div class="filter-left">
+      <div class="search-wrap">
+        <span src="assets/image.png" class="search-icon" alt="חיפוש"></span>
+        <input type="text" id="searchInput" class="search-input search-input--dark" placeholder="חיפוש..." />
+      </div>
+    </div>
 
   </div>
-
+</div>
+  
+  
   <!-- ══ Main Content ══ -->
   <main class="main-wrap">
 

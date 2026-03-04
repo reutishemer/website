@@ -110,7 +110,7 @@ html, body {
 
 
 /* -----the video without a blur----- */
-.hero-overlay {
+/* .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -118,15 +118,15 @@ html, body {
     rgba(0,0,0,0.3) 0%,
     rgba(0,0,0,0.5) 100%
   );
-}
+} */
 
 /* -----the video with a blur----- */
-/* .hero-overlay {
+.hero-overlay {
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.35);
   backdrop-filter: blur(4px);
-} */
+}
 
 
 
