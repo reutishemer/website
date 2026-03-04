@@ -37,8 +37,17 @@ body {
 /* ═══════════════════════════════
    NAV LOGO
 ═══════════════════════════════ */
-.nav-logo { position: fixed; top: 2rem; right: 2rem; z-index: 100; }
+/* הלוגו תמיד מעל הכל */
+.nav-logo{
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 500;
+}
+
+
 .nav-logo a { text-decoration: none; }
+
 .logo-circle {
   width: 4.5rem; height: 4.5rem;
   background: var(--white);
@@ -56,14 +65,51 @@ body {
 /* ═══════════════════════════════
    SCROLL SNAP
 ═══════════════════════════════ */
-.scroll-snap-container {
+/* .scroll-snap-container {
   height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y proximity;
   scroll-behavior: smooth;
-}
+} */
 .snap-section { scroll-snap-align: start; min-height: 100vh; }
 
+
+
+
+
+/* ==============================
+   FIX: sticky filter + logo on top
+   ============================== */
+
+/* הקונטיינר שבאמת גולל (אם יש לך אחד כזה) */
+.scroll-snap-container,
+.page-scroll {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* הפילטר נדבק לראש ה-VIEWPORT בזמן גלילה (אחרי שעוברים את ה-hero) */
+.filter-bar{
+  position: sticky;
+  top: 0;
+  z-index: 400;                 /* מתחת ללוגו */
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(8px);
+}
+
+/* הלוגו תמיד מעל ה-filter-bar */
+.nav-logo {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 500;
+}
+
+ביטול גלילה לרוחב
+html, body {
+  overflow-x: hidden;
+}
 
 /* ═══════════════════════════════
    STICKY TOP BAR
@@ -138,12 +184,14 @@ body {
 .search-wrap { position: relative; }
 .search-icon {
   position: absolute;
-  right: 1rem;
+  right: 0.9rem;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.95rem;
-  pointer-events: none;
-  opacity: 0.45;
+
+  width: 17px;
+  height: 17px;
+
+  opacity: 0.55;
 }
 .search-input {
   background: rgba(255,255,255,0.12);
@@ -170,13 +218,18 @@ body {
    HERO BANNER
 ═══════════════════════════════ */
 .products-hero {
+
   position: relative;
   height: 260px;
+  margin: 0;   
+  padding: 0;
   background: var(--navy-dark);
   display: flex;
   align-items: flex-end;
   overflow: hidden;
 }
+
+
 .products-hero-bg {
   position: absolute;
   inset: 0;
@@ -211,14 +264,16 @@ body {
 /* ═══════════════════════════════
    FILTER BAR
 ═══════════════════════════════ */
-.filter-bar {
+.filter-bar{
   background: var(--white);
   border-bottom: 1.5px solid var(--gray-border);
   box-shadow: 0 2px 12px rgba(26,58,74,0.06);
+  backdrop-filter: blur(6px); /*מוסיף טשטוש בגלילה*/
   position: sticky;
-  top: var(--topbar-h);
+  top: 0;           /* נדבק לראש */
   z-index: 120;
 }
+
 .filter-bar-inner {
   max-width: 1320px;
   margin: 0 auto;
@@ -280,8 +335,9 @@ body {
 ═══════════════════════════════ */
 .category-section {
   padding-top: 5rem;
-  scroll-margin-top: calc(var(--topbar-h) + 56px); /* sticky bars height */
+  scroll-margin-top: 80px;
 }
+
 
 .category-header {
   display: flex;
@@ -369,6 +425,7 @@ body {
   transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
 }
 .card-badge {
+  display: none;
   position: absolute;
   top: 0.85rem;
   left: 0.85rem;
@@ -414,6 +471,7 @@ body {
   flex-direction: column;
   flex-grow: 1;
   text-align: right;
+  margin:0; /* שומר שלא יהיה רווח לבן מעל התמונה */
 }
 .card-header-row {
   display: flex;
@@ -438,12 +496,13 @@ body {
 }
 .product-card:hover .card-title { color: var(--navy-hover); }
 .card-logo {
+   /*display: flex;*/
+  display: none !important; 
   width: 2.6rem;
   height: 2.6rem;
   background: var(--gray-bg);
   border-radius: 0.75rem;
   border: 1.5px solid var(--gray-border);
-  display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
@@ -724,3 +783,12 @@ body {
   .search-input.search-input--dark { width: 170px; }
   .search-input.search-input--dark:focus { width: 210px; }
 }
+
+
+
+
+
+
+
+
+
