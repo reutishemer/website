@@ -127,19 +127,16 @@
     <section class="snap-section magic-section">
       <h2 class="magic-title reveal">אז... איך הקסם קורה?</h2>
       <div class="magic-steps">
-        <div class="magic-path-wrap" aria-hidden="true">
-          <svg class="magic-path" viewBox="0 0 1000 2400" preserveAspectRatio="none">
-            <path d="M 750,300 C 750,600 250,600 250,900 C 250,1200 750,1200 750,1500 C 750,1800 250,1800 250,2100"
-              fill="none" stroke="#1a3a4a" stroke-width="6" stroke-dasharray="20,20" stroke-linecap="round"/>
-          </svg>
-        </div>
+        <svg class="magic-path" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible;">
+          <path id="magicPathLine" fill="none" stroke="#1a3a4a" stroke-width="6" stroke-dasharray="20,20" stroke-linecap="round" opacity="1"/>
+        </svg>
         <div class="magic-step reveal" data-side="right">
           <div class="magic-step-inner">
             <div class="magic-img-wrap">
               <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="שלב 1" />
               <div class="magic-img-hover"><p>בשלב הזה נפגשים... הכל מתחיל מרעיון קטן וחלום גדול. אנחנו כאן כדי להפוך אותו למציאות ויזואלית מדהימה.</p></div>
             </div>
-            <h4 class="magic-step-title">שיחת אפיון מול שה״ד 339</h4>
+            <h4 class="magic-step-title">שיחת התנעה מול שה״ד 339</h4>
           </div>
         </div>
         <div class="magic-step reveal" data-side="left">
@@ -175,8 +172,8 @@
     <!-- ═══ FOOTER ═══ -->
     <footer class="snap-section site-footer">
       <div class="footer-wave-wrap" aria-hidden="true">
-        <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
-          <path d="M0,15 C300,-15 900,30 1200,0 L1200,50 L0,50 Z" fill="#1a3a4a"></path>
+        <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+          <path d="M0,80 C300,-40 900,140 1200,20 L1200,100 L0,100 Z" fill="#1a3a4a"></path>
         </svg>
       </div>
       <div class="footer-inner">
@@ -184,7 +181,6 @@
           <h3 class="footer-h3">אם הגעתם עד לפה...</h3>
           <button class="footer-cta" onclick="window.location.href='products.html#section-movies'">
             <span>לא משנה מתי... רק תגידו!</span>
-            <span class="footer-arrow">&#8592;</span>
           </button>
           <p class="footer-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="83f0ebe2e0ebe2e7b0b0bac3eae2e5ade4ecf5adeaef">[email&#160;protected]</a></p>
         </div>
