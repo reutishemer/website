@@ -22,7 +22,8 @@ html, body {
   color: var(--navy);
 }
 
-::-webkit-scrollbar { width: 1vw; }
+
+::-webkit-scrollbar { width: 0.5vw; }
 ::-webkit-scrollbar-track { background: #edf0f4; }
 ::-webkit-scrollbar-thumb { background: var(--navy); border-radius: 4px; }
 
@@ -206,151 +207,101 @@ html, body {
 /* ═══════════════════════════════
    SECTION CARDS
 ═══════════════════════════════ */
-
-.section-card-wrap {
+/* ═══════════════════════════════
+   CATEGORIES
+═══════════════════════════════ */
+.categories-section {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 1rem 2rem;  /* היה 1.5rem */     /* היה 3rem */
-  background: var(--gray-bg);
-  background-image: radial-gradient(#c9d4df 1px, transparent 1px);
-  background-size: 1.75rem 1.75rem;
-  min-height: auto;      /* היה 60vh */
-}
-
-
-.section-card {
-  width: min(62.5vw, 94%);  /* היה min(1200px, 94%) */
-  max-width: 62.5vw;         /* היה 1200px */
-  display: grid; grid-template-columns: 1fr;
-  border-radius: 3rem; overflow: hidden;
-  box-shadow: 0 12px 48px rgba(26,58,74,0.14);
-  align-items: stretch;
-  cursor: pointer;
-  transition: box-shadow var(--transition), transform var(--transition);
-}
-
-
-.section-card-wrap.reversed {
-  justify-content: flex-end; /* ימין */
-}
-
-.section-card:hover { box-shadow: 0 24px 72px rgba(26,58,74,0.22); transform: translateY(-4px); }
-@media (min-width: 34.7vw) {
-  .section-card { grid-template-columns: 0.5fr 0.5fr; }
-  .section-card-wrap.reversed .section-card-img { order: 2; }
-  .section-card-wrap.reversed .section-card-body { order: 1; }
-}
-
-.section-card-wrap:nth-child(even) .section-card {
-  direction: ltr;
-}
-
-.section-card-wrap:nth-child(even) .section-card-body {
-  text-align: right;
-}
-
-
-/* .section-card-img {
-  position: relative;
-  max-height: 31vh;   /* ← הוסף שורה זו 
-  overflow: hidden;
-  height: 31vh; 
-} 
-*/
-.section-card-img {
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  min-height: 20vh;
-  display: flex;
-}
-
-.section-card-img img {
-  width: 100%;
-  height: 100%; 
-  object-fit: cover;
-  transition: transform 0.9s cubic-bezier(0.4,0,0.2,1);
-}
-
-.section-card:hover .section-card-img img { 
-  transform: scale(1.06); 
-}
-.section-card-img-overlay { 
-  position: absolute; 
-  inset: 0; 
-  background: rgba(0,0,0,0.08); 
-}
-
-.section-card-body {
-  background: var(--navy); 
-  color: var(--white);
-  display: flex; 
-  flex-direction: column; 
   justify-content: center;
-   padding: 6rem 2rem;  /* כבר נמוך, אבל אפשר להוריד עוד ל-1rem 1.5rem */
-  text-align: right;
-  transition: background var(--transition);
+   background: transparent;
+  background-image: none;
+  background-size: 1.75rem 1.75rem;
+  padding: 4rem 2rem;
 }
 
-.section-card:hover .section-card-body { 
-  background: var(--navy-hover); 
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  max-width: 900px;
+  width: 100%;
 }
-
-.section-card-title {
-  font-size: clamp(2.5rem,5vw,4rem); font-weight: 900;
-  letter-spacing: -0.02em; margin-bottom: 1.2rem;
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  gap: 1rem;
   transition: transform var(--transition);
 }
 
-.section-card:hover .section-card-title { 
-  transform: translateX(10px); 
+.category-card:hover { transform: translateY(-6px); }
+
+.category-img-wrap {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--navy);
+  box-shadow: 0 8px 32px rgba(26,58,74,0.18);
+  transition: box-shadow var(--transition), transform var(--transition);
 }
 
-.section-card-desc {
-  font-size: clamp(0.95rem,1.5vw,1.1rem); 
-  line-height: 1.75;
-  opacity: 0.75; 
-  margin-bottom: 1.2rem;
-  margin-bottom: 1.5rem;
-  max-width: 30rem;
+.category-card:hover .category-img-wrap {
+  box-shadow: 0 16px 48px rgba(26,58,74,0.28);
+  transform: scale(1.05);
 }
 
-.section-card-cta {
-  display: flex; 
-  align-items: center; 
-  gap: 1.5rem;
-  font-size: 0.8rem; 
-  font-weight: 900; 
-  letter-spacing: 0.18em; 
-  text-transform: uppercase;
+.category-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s ease;
 }
 
-.cta-line {
-  flex: 1;
-  max-width: 5rem; 
-  height: 0.5vh;
-  background: var(--white); 
-  transform-origin: right;
-  transition: max-width var(--transition);
+.category-card:hover .category-img-wrap img { transform: scale(1.1); }
+
+.category-title {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 900;
+  color: var(--navy);
 }
 
-.section-card:hover .cta-line { 
-  max-width: 10rem; 
+.category-desc {
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  line-height: 1.7;
+  color: var(--navy);
+  opacity: 0.65;
 }
 
+.category-cta {
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: var(--navy);
+  opacity: 0.5;
+  transition: opacity var(--transition);
+}
+
+.category-card:hover .category-cta { opacity: 1; }
 
 
 /* ═══════════════════════════════
    MAGIC SECTION
 ═══════════════════════════════ */
 .magic-section {
-  background: #f7f8fa;
+    background-color: #f3f5f8;
+  background-image: radial-gradient(#c9d4df 1px, transparent 1px);
+  background-size: 1.75rem 1.75rem;
   display: flex; 
   flex-direction: column; 
   align-items: center;
   padding: 6rem 2rem 8rem; 
   overflow: hidden;
+  position: relative;
+  padding-bottom: 0;
 }
 
 .magic-title {
@@ -407,29 +358,27 @@ html, body {
   flex-direction: column; 
   justify-content: space-between;
   position: relative; 
-  overflow: visible; 
+  overflow: visible;
   min-height: 60vh;
 }
 
 .footer-wave-wrap {
-  position: absolute; 
-  top: 0; 
+  position: relative;
+  top: 0;
   left: 0;
-  bottom: -0.1vh;
-  width: 100%; 
-  overflow: hidden; 
+  width: 110%;
   line-height: 0;
-  transform: translateY(-100%); 
-  transform: none;
+  /* transform: translateY(-100%); */
   z-index: 10;
+  overflow: visible;
+  margin-bottom: -1px;
 }
-
 
 
 .footer-wave-wrap svg {
    display: block; 
-   width: calc(100% + 0.14vw); 
-   height: 6vh; 
+   width: 100%;
+   height: 10vh; 
   }
 
 .footer-inner {

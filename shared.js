@@ -50,10 +50,45 @@ function initScrollChevron() {
   if (!chevron) return;
   chevron.addEventListener('click', () => {
     const container = document.querySelector('.scroll-snap-container');
-    const target    = document.getElementById('firstRow');
+    const target    = document.querySelector('.categories-section'); // ← שינוי כאן
     if (container && target) container.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
   });
 }
+
+/* ─────────────────────────────────────────
+   path in homePage
+───────────────────────────────────────── */
+function drawMagicPath() {
+  const steps = document.querySelectorAll('.magic-img-wrap');
+  const svg = document.querySelector('.magic-path');
+  const pathEl = document.getElementById('magicPathLine');
+  if (!steps.length || !svg || !pathEl) return;
+
+  const container = document.querySelector('.magic-steps');
+  const containerRect = container.getBoundingClientRect();
+
+  const points = Array.from(steps).map(el => {
+    const rect = el.getBoundingClientRect();
+    return {
+      x: rect.left + rect.width / 2 - containerRect.left,
+      y: rect.top + rect.height / 2 - containerRect.top
+    };
+  });
+
+  let d = `M ${points[0].x} ${points[0].y}`;
+  for (let i = 1; i < points.length; i++) {
+    const prev = points[i - 1];
+    const curr = points[i];
+    const cy = (prev.y + curr.y) / 2;
+    d += ` C ${prev.x} ${cy}, ${curr.x} ${cy}, ${curr.x} ${curr.y}`;
+  }
+
+  pathEl.setAttribute('d', d);
+}
+
+window.addEventListener('load', drawMagicPath);
+window.addEventListener('resize', drawMagicPath);
+
 
 /* ─────────────────────────────────────────
    PRODUCTS PAGE
