@@ -251,11 +251,19 @@ html, body {
 }
 
 
-.section-card-img {
+/* .section-card-img {
   position: relative;
-  max-height: 31vh;   /* ← הוסף שורה זו */
+  max-height: 31vh;   /* ← הוסף שורה זו 
   overflow: hidden;
   height: 31vh; 
+} 
+*/
+.section-card-img {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  min-height: 20vh;
+  display: flex;
 }
 
 .section-card-img img {
@@ -280,7 +288,7 @@ html, body {
   display: flex; 
   flex-direction: column; 
   justify-content: center;
-   padding: 1.4rem 2rem;  /* כבר נמוך, אבל אפשר להוריד עוד ל-1rem 1.5rem */
+   padding: 6rem 2rem;  /* כבר נמוך, אבל אפשר להוריד עוד ל-1rem 1.5rem */
   text-align: right;
   transition: background var(--transition);
 }
@@ -464,11 +472,23 @@ html, body {
 
 .footer-cta:hover { color: var(--white); }
 
-.footer-email { 
+/* .footer-email { 
   color: rgba(255,255,255,0.4); 
   font-size: clamp(1rem,2vw,1.4rem); 
   font-weight: 700; 
+} */
+
+/* זה מה שבאמת מעצב את האימייל לא הכיתה שלמעלה*/
+/*קישור לא עובד בגלל אבטחה בשרת אמיתי אמור לעבוד*/
+.__cf_email__ {
+  color: rgba(255,255,255,0.4); 
+  font-size: clamp(1rem,2vw,1.4rem); 
+  font-weight: 700;
+  text-decoration: none !important;
+  display: block;
 }
+
+
 .footer-logo { 
   flex-shrink: 0; 
 }
