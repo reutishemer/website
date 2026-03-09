@@ -54,41 +54,6 @@ function initScrollChevron() {
     if (container && target) container.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
   });
 }
-/* ─────────────────────────────────────────
-   path in homePage
-───────────────────────────────────────── */
-function drawMagicPath() {
-  const steps = document.querySelectorAll('.magic-img-wrap');
-  const svg = document.querySelector('.magic-path');
-  const pathEl = document.getElementById('magicPathLine');
-  if (!steps.length || !svg || !pathEl) return;
-
-  const container = document.querySelector('.magic-steps');
-  const containerRect = container.getBoundingClientRect();
-
-  const points = Array.from(steps).map(el => {
-    const rect = el.getBoundingClientRect();
-    return {
-      x: rect.left + rect.width / 2 - containerRect.left,
-      y: rect.top + rect.height / 2 - containerRect.top
-    };
-  });
-
-  let d = `M ${points[0].x} ${points[0].y}`;
-  for (let i = 1; i < points.length; i++) {
-    const prev = points[i - 1];
-    const curr = points[i];
-    const cy = (prev.y + curr.y) / 2;
-    d += ` C ${prev.x} ${cy}, ${curr.x} ${cy}, ${curr.x} ${curr.y}`;
-  }
-
-  pathEl.setAttribute('d', d);
-}
-
-window.addEventListener('load', drawMagicPath);
-window.addEventListener('resize', drawMagicPath);
-
-
 
 /* ─────────────────────────────────────────
    PRODUCTS PAGE
@@ -99,15 +64,61 @@ function initProductsPage() {
   const gridGraphics  = document.getElementById('grid-graphics');
   if (!gridMovies) return; // לא בעמוד תוצרים
 
-  const searchInput = document.getElementById('searchInput');
-  const filterChips = document.querySelectorAll('.fchip');
-  const filterCount = document.getElementById('filterCount');
-  const emptyState  = document.getElementById('emptyState');
-  const clearBtn    = document.getElementById('clearBtn');
-  const jumpLinks   = document.querySelectorAll('.jump-link');
+  const searchInput   = document.getElementById('searchInput');
+  const filterCount   = document.getElementById('filterCount');
+  const emptyState    = document.getElementById('emptyState');
+  const clearBtn      = document.getElementById('clearBtn');
+  const jumpLinks     = document.querySelectorAll('.jump-link');
+  const filterTrigger = document.getElementById('filterTrigger');
+  const filterPanel   = document.getElementById('filterPanel');
+  const filterTriggerText = document.getElementById('filterTriggerText');
+  const filterClear   = document.getElementById('filterClear');
+  const filterOptBtns = document.querySelectorAll('.fopt');
 
-  let activeFilter = 'all';
-  let searchTerm   = '';
+  // כל הסוגים מסומנים כברירת מחדל
+  let selectedFilters = new Set(Array.from(filterOptBtns).map(b => b.dataset.filter));
+  let searchTerm = '';
+
+  /* ── עדכון תווית הדרופדאון ── */
+  function updateTriggerLabel() {
+    if (!filterTriggerText) return;
+    filterTriggerText.textContent =
+      selectedFilters.size === filterOptBtns.length ? 'הכל' :
+      selectedFilters.size === 0 ? 'ללא' : `נבחרו ${selectedFilters.size}`;
+  }
+
+  /* ── פתיחה/סגירה של הפאנל ── */
+  if (filterTrigger && filterPanel) {
+    filterTrigger.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = !filterPanel.classList.contains('hidden');
+      filterPanel.classList.toggle('hidden', isOpen);
+      filterTrigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+    document.addEventListener('click', () => filterPanel.classList.add('hidden'));
+    filterPanel.addEventListener('click', e => e.stopPropagation());
+  }
+
+  /* ── לחיצה על אפשרות סינון ── */
+  filterOptBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const f = btn.dataset.filter;
+      if (selectedFilters.has(f)) { selectedFilters.delete(f); }
+      else { selectedFilters.add(f); }
+      btn.classList.toggle('active', selectedFilters.has(f));
+      updateTriggerLabel();
+      render();
+    });
+  });
+
+  /* ── נקה סינון ── */
+  if (filterClear) {
+    filterClear.addEventListener('click', () => {
+      filterOptBtns.forEach(b => { selectedFilters.add(b.dataset.filter); b.classList.add('active'); });
+      updateTriggerLabel();
+      render();
+    });
+  }
 
   /* ── Render all grids ── */
   function render() {
@@ -123,7 +134,7 @@ function initProductsPage() {
     Object.entries(grids).forEach(([cat, grid]) => {
       const filtered = PRODUCTS.filter(p => {
         if (p.category !== cat) return false;
-        if (activeFilter !== 'all' && p.type !== activeFilter) return false;
+        if (selectedFilters.size > 0 && !selectedFilters.has(p.type)) return false;
         if (q && !p.title.includes(q) && !p.unit.includes(q) && !p.type.includes(q)) return false;
         return true;
       });
@@ -135,15 +146,11 @@ function initProductsPage() {
         grid.appendChild(card);
       });
 
-      // Hide/show entire section based on results
       const section = document.getElementById('section-' + cat);
       if (section) section.style.display = filtered.length === 0 ? 'none' : '';
     });
 
-    // Update count
     filterCount.textContent = total === PRODUCTS.length ? 'מציג הכל' : `מציג ${total} תוצרים`;
-
-    // Empty state
     emptyState.classList.toggle('hidden', total > 0);
   }
 
@@ -178,29 +185,18 @@ function initProductsPage() {
     return card;
   }
 
-  /* ── Filter chips ── */
-  filterChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      filterChips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      activeFilter = chip.dataset.filter;
-      render();
-    });
-  });
-
   /* ── Search ── */
-  searchInput.addEventListener('input', e => {
+  if (searchInput) searchInput.addEventListener('input', e => {
     searchTerm = e.target.value;
     render();
   });
 
-  /* ── Clear ── */
-  clearBtn.addEventListener('click', () => {
+  /* ── Clear empty state btn ── */
+  if (clearBtn) clearBtn.addEventListener('click', () => {
     searchTerm = '';
-    searchInput.value = '';
-    activeFilter = 'all';
-    filterChips.forEach(c => c.classList.remove('active'));
-    document.querySelector('.fchip[data-filter="all"]').classList.add('active');
+    if (searchInput) searchInput.value = '';
+    filterOptBtns.forEach(b => { selectedFilters.add(b.dataset.filter); b.classList.add('active'); });
+    updateTriggerLabel();
     render();
   });
 
@@ -625,4 +621,3 @@ function closeAModal(o) {
   o.classList.remove('amodal-visible');
   o.addEventListener('transitionend', () => o.remove(), { once: true });
 }
-
