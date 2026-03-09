@@ -9,7 +9,7 @@
 ───────────────────────────────────────── */
 let PRODUCTS = [
   // Movies
-  { id: 'm1', category: 'movies',    title: 'חיסול הטרור',     unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: 'https://picsum.photos/id/1/600/400' },
+  { id: 'm1', category: 'movies',    title: 'חיסול הטרור',     unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: 'https://picsum.photos/id/1/600/400', fileUrl: 'https://www.w3schools.com/html/mov_bbb.mp4' },
   { id: 'm2', category: 'movies',    title: 'חיבוק ברזל',      unit: 'פיקוד העורף',  type: 'סרט',      imageUrl: 'https://picsum.photos/id/2/600/400' },
   { id: 'm3', category: 'movies',    title: 'מבצע שלום',        unit: 'יהל"ם',        type: 'תיעוד',    imageUrl: 'https://picsum.photos/id/3/600/400' },
   { id: 'm4', category: 'movies',    title: 'כנפי האש',         unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: 'https://picsum.photos/id/4/600/400' },
@@ -182,7 +182,64 @@ function initProductsPage() {
         </div>
       </div>
     `;
+    // לחיצה על כפתור צפייה
+    card.querySelector('.card-view-btn').addEventListener('click', e => {
+      e.stopPropagation();
+      openViewModal(product);
+    });
+    // לחיצה על הכרטיס עצמו
+    card.addEventListener('click', () => openViewModal(product));
+
     return card;
+  }
+
+  /* ── View Modal ── */
+  function openViewModal(product) {
+    const isVideo = product.fileUrl && /\.(mp4|mov|avi|webm)$/i.test(product.fileUrl);
+    const isPoster = ['פוסטר','לוגו','UX/UI','דו-מימד','תלת-מימד','קלאסי'].includes(product.type);
+
+    let mediaHtml;
+    if (isVideo) {
+      mediaHtml = `<video src="${product.fileUrl}" controls autoplay style="width:100%;max-height:70vh;border-radius:1rem;background:#000;display:block;"></video>`;
+    } else if (product.fileUrl && /\.(pdf|pptx)$/i.test(product.fileUrl)) {
+      mediaHtml = `
+        <img src="${product.imageUrl}" alt="${product.title}" style="width:100%;max-height:70vh;object-fit:contain;border-radius:1rem;display:block;" />
+        <a href="${product.fileUrl}" download style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:1rem;background:#1a3a4a;color:#fff;text-decoration:none;padding:0.65rem 1.5rem;border-radius:999px;font-weight:900;font-size:0.95rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          הורדת קובץ
+        </a>`;
+    } else {
+      mediaHtml = `<img src="${product.imageUrl}" alt="${product.title}" style="width:100%;max-height:70vh;object-fit:${isPoster?'contain':'cover'};border-radius:1rem;display:block;" />`;
+    }
+
+    const o = document.createElement('div');
+    o.id = 'viewModal';
+    o.style.cssText = `position:fixed;inset:0;background:rgba(10,20,30,0.85);backdrop-filter:blur(6px);z-index:4000;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;transition:opacity 0.25s ease;`;
+    o.innerHTML = `
+      <div style="background:#fff;border-radius:1.75rem;width:min(900px,95vw);max-height:92vh;overflow-y:auto;position:relative;padding:2rem;direction:rtl;transform:scale(0.96);transition:transform 0.25s ease;">
+        <button id="closeViewModal" style="position:absolute;top:1rem;right:1rem;background:#f3f5f8;border:none;border-radius:50%;width:2.4rem;height:2.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:background 0.2s;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a3a4a" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <p style="font-size:0.72rem;font-weight:900;color:#94a3b8;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.35rem;">${product.type} · ${product.unit}</p>
+        <h2 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:900;color:#1a3a4a;margin-bottom:1.25rem;line-height:1.2;">${product.title}</h2>
+        <div style="text-align:center;">${mediaHtml}</div>
+      </div>`;
+    document.body.appendChild(o);
+    requestAnimationFrame(() => {
+      o.style.opacity = '1';
+      o.querySelector('div').style.transform = 'scale(1)';
+    });
+
+    const close = () => {
+      o.style.opacity = '0';
+      o.querySelector('div').style.transform = 'scale(0.96)';
+      o.addEventListener('transitionend', () => o.remove(), { once: true });
+    };
+    o.querySelector('#closeViewModal').addEventListener('click', close);
+    o.addEventListener('click', e => { if (e.target === o) close(); });
+    document.addEventListener('keydown', function esc(e) {
+      if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); }
+    });
   }
 
   /* ── Search ── */
