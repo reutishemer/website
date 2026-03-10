@@ -5,21 +5,31 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy: #1a3a4a;
-  --navy-hover: #243f52;
-  --white: #ffffff;
-  --gray-bg: #f3f5f8;
-  --gray-border: rgba(26,58,74,0.15);
+  --navy: #343434;
+  --navy-hover: #2d2e2e;
+  --white: #cfcaca;
+  --gray-bg: #242323;
+  --gray-border: rgba(255,255,255,0.1);
   --transition: 0.4s cubic-bezier(0.4,0,0.2,1);
-}
 
+  /* dark mode */
+  --bg: #0a0a0a;
+  --bg-card: #111111;
+  --bg-section: #111111;
+  --text: #f0f0f0;
+  --text-muted: rgba(255,255,255,0.5);
+  --dot-color: rgba(255,255,255,0.07);
+}
 
 html, body {
   height: 100%;
   font-family: 'Assistant', sans-serif;
   direction: rtl;
   overflow: hidden;
-  color: var(--navy);
+  color: var(--text);
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+  background-size: 1.75rem 1.75rem;
 }
 
 
@@ -48,9 +58,10 @@ html, body {
 
 .logo-circle {
   width: 4.5rem; height: 4.5rem;
-  background: var(--white);
+  background: #111;
   border-radius: 50%;
-  border: 3px solid var(--navy);
+  border: 3px solid;
+   border-color: rgba(255,255,255,0.2);
   box-shadow: 0 8px 24px rgba(26,58,74,0.2);
   display: flex; align-items: center; justify-content: center;
   padding: 0.45rem;
@@ -214,11 +225,13 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-   background: transparent;
-  background-image: none;
+  background-color: #111111;
+  /* background: transparent;
+  background-image: none; */
   background-size: 1.75rem 1.75rem;
   padding: 4rem 2rem;
 }
+
 
 .categories-grid {
   display: grid;
@@ -245,6 +258,7 @@ html, body {
   border-radius: 50%;
   overflow: hidden;
   border: 4px solid var(--navy);
+  border-color: rgba(255,255,255,0.2);
   box-shadow: 0 8px 32px rgba(26,58,74,0.18);
   transition: box-shadow var(--transition), transform var(--transition);
 }
@@ -266,21 +280,21 @@ html, body {
 .category-title {
   font-size: clamp(1.8rem, 3vw, 2.5rem);
   font-weight: 900;
-  color: var(--navy);
+  color: var(--text);
 }
 
 .category-desc {
   font-size: clamp(0.85rem, 1.2vw, 1rem);
   line-height: 1.7;
-  color: var(--navy);
-  opacity: 0.65;
+  color: var(--text);
+  opacity: 0.6;
 }
 
 .category-cta {
   font-size: 0.85rem;
   font-weight: 900;
   letter-spacing: 0.1em;
-  color: var(--navy);
+  color: var(--text);
   opacity: 0.5;
   transition: opacity var(--transition);
 }
@@ -292,9 +306,11 @@ html, body {
    MAGIC SECTION
 ═══════════════════════════════ */
 .magic-section {
-    background-color: #f3f5f8;
-  background-image: radial-gradient(#c9d4df 1px, transparent 1px);
-  background-size: 1.75rem 1.75rem;
+  /* background-color: #111111;
+  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 1.75rem 1.75rem; */
+  background: transparent;
+  background-image: none;
   display: flex; 
   flex-direction: column; 
   align-items: center;
@@ -307,7 +323,7 @@ html, body {
 .magic-title {
   font-size: clamp(2rem,5vw,3.5rem); 
   font-weight: 900;
-  color: var(--navy); 
+   color: var(--text);
   margin-bottom: 5rem; 
   text-align: center;
 }
@@ -340,19 +356,25 @@ html, body {
 .magic-img-wrap:hover img { transform: scale(1.05); }
 .magic-img-hover {
   position: absolute; inset: 0;
-  background: rgba(26,58,74,0.87);
+  background: rgba(32, 32, 32, 0.87);
   opacity: 0; display: flex; align-items: center; justify-content: center;
   padding: 2rem; transition: opacity var(--transition); backdrop-filter: blur(4px);
 }
 .magic-img-wrap:hover .magic-img-hover { opacity: 1; }
 .magic-img-hover p { color: var(--white); font-size: clamp(0.9rem,1.5vw,1.1rem); font-weight: 700; text-align: center; line-height: 1.65; }
-.magic-step-title { font-size: clamp(1.3rem,2.5vw,1.9rem); font-weight: 900; color: var(--navy); text-align: center; line-height: 1.2; }
+.magic-step-title { 
+  font-size: clamp(1.3rem,2.5vw,1.9rem); 
+  font-weight: 900; 
+  color: var(--text);
+  text-align: center; 
+  line-height: 1.2; 
+}
 
 /* ═══════════════════════════════
    FOOTER
 ═══════════════════════════════ */
 .site-footer {
-  background: var(--navy); 
+  background: #1e1e1e;
   color: var(--white);
   display: flex; 
   flex-direction: column; 
@@ -360,6 +382,7 @@ html, body {
   position: relative; 
   overflow: visible;
   min-height: 60vh;
+  margin-top: 3rem;
 }
 
 .footer-wave-wrap {
@@ -497,13 +520,13 @@ html, body {
   display: flex;
   gap: 1.2rem;
 
-  background: rgba(255,255,255,0.92);
+  background: rgba(255, 255, 255, 0.95);
+  /* background: rgba(0, 0, 0, 0.95); */
   padding: 0.55rem 1.3rem;
   border-radius: 999px;
 
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  border: 1px solid rgba(26,58,74,0.12);
-
+  border: 1px solid rgba(255,255,255,0.1);
   backdrop-filter: blur(10px);
   white-space: nowrap;
 
@@ -529,7 +552,8 @@ html, body {
 .menu-item {
   background: none;
   border: none;
-  color: var(--navy);
+  color: rgb(0, 0, 0);
+  /* color: rgb(255, 255, 255); */
   font-family: 'Assistant', sans-serif;
   font-weight: 800;
   cursor: pointer;
@@ -568,25 +592,44 @@ html, body {
 /* עיצוב הפופ-אפ */
 .modal {
   position: fixed; inset: 0;
-  background: rgba(26, 58, 74, 0.7);
+  background: rgba(0, 0, 0, 0.75);
   z-index: 2000;
   display: none; /* מוסתר כברירת מחדל */
   align-items: center; justify-content: center;
 }
 .modal.active { display: flex; }
 .modal-content {
-  background: white; padding: 2rem; border-radius: 1.5rem; width: 300px; text-align: center;
+  background: #1a1a1a;
+  color: #f0f0f0;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  width: 300px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.08);
 }
+
 .modal-content input { width: 100%; margin: 8px 0; padding: 10px; border-radius: 5px; border: 1px solid #ddd; }
-#doLogin { background: var(--navy); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+#doLogin { 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #1a3a4a;
+    color: #ececec;
+    font-family: 'Assistant', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+}
 
 #closeModal {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background: #f3f5f8;
-    color: #1a3a4a;
-    border: 1.5px solid #e2e8f0;
+    font-family: 'Assistant', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    background: white; 
+    color: black; 
 }
 

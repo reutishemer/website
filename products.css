@@ -5,13 +5,13 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy:        #1a3a4a;
-  --navy-dark:   #122c39;
-  --navy-hover:  #243f52;
-  --white:       #ffffff;
-  --gray-bg:     #f3f5f8;
-  --gray-border: #e2e8f0;
-  --gray-text:   #64748b;
+  --navy:        #e0eaf0;
+  --navy-dark:   #0a0a0a;
+  --navy-hover:  #ffffff;
+  --white:       #111111;
+  --gray-bg:     #0a0a0a;
+  --gray-border: rgba(255,255,255,0.1);
+  --gray-text:   rgba(255,255,255,0.5);
   --transition:  0.32s cubic-bezier(0.4,0,0.2,1);
   --topbar-h:    72px;
 }
@@ -20,10 +20,10 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Assistant', sans-serif;
-  background: var(--gray-bg);
-  background-image: radial-gradient(#c9d4df 1px, transparent 1px);
+  background-color: #0a0a0a;
+  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
   background-size: 28px 28px;
-  color: var(--navy);
+  color: #0a0a0a;
   direction: rtl;
   min-height: 100vh;
 }
@@ -213,6 +213,10 @@ html, body {
   background: rgba(255,255,255,0.2);
   width: 280px;
 }
+.filter-bar:focus-within .search-icon {
+  opacity: 1;
+  filter: brightness(0) invert(1);
+}
 
 /* ═══════════════════════════════
    HERO BANNER
@@ -234,8 +238,8 @@ html, body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, rgba(26,58,74,0.95) 0%, rgba(44,80,100,0.8) 100%),
-    url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80') center/cover no-repeat;
+    /* linear-gradient(135deg, rgba(32, 32, 32, 0.95) 0%, rgba(51, 51, 51, 0.8) 100%), */
+    url('../assets/filmBg.jpg') center/cover no-repeat;
   opacity: 0.9;
 }
 .products-hero-content {
@@ -249,7 +253,7 @@ html, body {
 .products-hero-title {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 900;
-  color: var(--white);
+  color: var(--navy);
   letter-spacing: -0.03em;
   line-height: 1;
 }
@@ -265,8 +269,9 @@ html, body {
    FILTER BAR
 ═══════════════════════════════ */
 .filter-bar{
-  background: var(--white);
+  background: rgba(15,15,15,0.96);
   border-bottom: 1.5px solid var(--gray-border);
+  border-color: rgba(255,255,255,0.08);
   box-shadow: 0 2px 12px rgba(26,58,74,0.06);
   backdrop-filter: blur(6px); /*מוסיף טשטוש בגלילה*/
   position: sticky;
@@ -290,7 +295,7 @@ html, body {
 .filter-label-text {
   font-weight: 900;
   font-size: 0.8rem;
-  color: var(--gray-text);
+  color: #f0f0f0;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   flex-shrink: 0;
@@ -352,7 +357,7 @@ html, body {
 .category-header-line {
   width: 5px;
   min-height: 90px;
-  background: var(--navy);
+   background: rgba(255,255,255,0.3);
   border-radius: 999px;
   flex-shrink: 0;
   margin-top: 4px;
@@ -392,10 +397,10 @@ html, body {
 
 /* ── Product Card ── */
 .product-card {
-  background: var(--white);
+  background: #1a1a1a;
   border-radius: 1.75rem;
   overflow: hidden;
-  border: 1.5px solid var(--gray-border);
+  border: 1.5px solid  rgba(255,255,255,0.08);
   box-shadow: 0 4px 20px rgba(26,58,74,0.07);
   display: flex;
   flex-direction: column;
@@ -529,6 +534,7 @@ html, body {
   color: var(--gray-text);
   font-weight: 700;
   font-size: 0.82rem;
+  border-color: rgba(255,255,255,0.08);
 }
 .card-dot {
   width: 0.4rem;
@@ -626,6 +632,7 @@ html, body {
   gap: 1.2rem;
 
   background: rgba(255,255,255,0.92);
+  /* background: black; */
   /* padding: 0.55rem 1.3rem; */
   border-radius: 999px;
 
@@ -644,7 +651,8 @@ html, body {
 .menu-item {
   background: none;
   border: none;
-  color: var(--navy);
+  color: rgb(0, 0, 0);
+  /* color: rgb(255, 255, 255); */
   font-family: 'Assistant', sans-serif;
   font-weight: 800;
   cursor: pointer;
@@ -660,7 +668,7 @@ html, body {
 }
 
 .menu-item:hover {
-  color: var(--navy-hover);
+  color: #2d2e2e;
   background-color: rgba(26,58,74,0.10);
   transform: translateY(-1px);
 }
@@ -668,17 +676,33 @@ html, body {
 /* עיצוב הפופ-אפ */
 .modal {
   position: fixed; inset: 0;
-  background: rgba(26, 58, 74, 0.7);
+  background: rgba(0, 0, 0, 0.75);
   z-index: 2000;
   display: none; /* מוסתר כברירת מחדל */
   align-items: center; justify-content: center;
 }
 .modal.active { display: flex; }
 .modal-content {
-  background: white; padding: 2rem; border-radius: 1.5rem; width: 300px; text-align: center;
+  background: #1a1a1a;
+  color: #f0f0f0;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  width: 300px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 .modal-content input { width: 100%; margin: 8px 0; padding: 10px; border-radius: 5px; border: 1px solid #ddd; }
-#doLogin { background: var(--navy); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+#doLogin { 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #1a3a4a;
+    color: #ececec;
+    font-family: 'Assistant', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+}
 
 
 
@@ -707,7 +731,7 @@ html, body {
 
 /* Reuse search styling but for light background */
 .search-input.search-input--dark {
-  background: var(--gray-bg);
+  background: rgb(237, 237, 237);
   border: 1.5px solid var(--gray-border);
   color: var(--navy);
   width: 240px;
@@ -729,8 +753,9 @@ html, body {
   padding: 0.45rem 1rem;
   border-radius: 999px;
   border: 1.5px solid var(--gray-border);
-  background: var(--gray-bg);
-  color: var(--navy);
+  background: #1a1a1a;
+  border-color: rgba(255,255,255,0.1);
+  color: #f0f0f0;
   font-family: 'Assistant', sans-serif;
   font-weight: 900;
   cursor: pointer;
@@ -750,8 +775,8 @@ html, body {
   top: calc(100% + 0.6rem);
   right: 0;
   width: min(420px, 86vw);
-  background: rgba(255,255,255,0.98);
-  border: 1.5px solid var(--gray-border);
+  background: #1a1a1a;
+  border: 1.5px solid rgba(255,255,255,0.1);
   border-radius: 1.25rem;
   box-shadow: 0 18px 55px rgba(26,58,74,0.20);
   padding: 1rem;
@@ -768,13 +793,13 @@ html, body {
 
 .filter-panel-title {
   font-weight: 900;
-  color: var(--navy);
+  color: #f0f0f0;
 }
 
 .filter-clear {
   background: none;
   border: none;
-  color: var(--navy);
+  color: #f0f0f0;
   font-family: 'Assistant', sans-serif;
   font-weight: 900;
   cursor: pointer;
@@ -789,14 +814,14 @@ html, body {
 
 /* Multi-select option button (same vibe as chips) */
 .fopt {
-  background: var(--gray-bg);
-  border: 1.5px solid var(--gray-border);
+  background: rgba(88, 88, 88, 0.1);
+  color: var(--navy);
+  border: 0.5px solid rgba(255,255,255,0.1);
   border-radius: 999px;
   padding: 0.35rem 0.95rem;
   font-family: 'Assistant', sans-serif;
   font-weight: 800;
   font-size: 0.85rem;
-  color: var(--navy);
   cursor: pointer;
   transition: all var(--transition);
   white-space: nowrap;
@@ -804,14 +829,21 @@ html, body {
 .fopt:hover { border-color: var(--navy); }
 .fopt.active {
   background: var(--navy);
-  border-color: var(--navy);
   color: var(--white);
 }
 
 /* Mobile tweaks */
 @media (max-width: 768px) {
-  .search-input.search-input--dark { width: 170px; }
-  .search-input.search-input--dark:focus { width: 210px; }
+  .search-input.search-input--dark { 
+    width: 170px;
+    background: #1a1a1a;
+    border-color: rgba(114, 114, 114, 0.1);
+    color: #f0f0f0; 
+  }
+  .search-input.search-input--dark:focus { 
+    width: 210px; 
+    background: #3f3f3f7d;
+  }
 }
 
 /* ==============================
@@ -1164,9 +1196,11 @@ body.scrolled .filter-bar-inner{
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background: #f3f5f8;
-    color: #1a3a4a;
-    border: 1.5px solid #e2e8f0;
+    font-family: 'Assistant', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    background: white; 
+    color: black; 
 }
 
 
@@ -1175,14 +1209,15 @@ body.scrolled .filter-bar-inner{
    FOOTER
 ═══════════════════════════════ */
 .site-footer {
-  background: var(--navy); 
-  color: var(--white);
+  background: #1e1e1e;
+  color:#cfcaca;
   display: flex; 
   flex-direction: column; 
   justify-content: space-between;
   position: relative; 
   overflow: visible; 
   min-height: 60vh;
+  margin-top: 3rem;
 }
 
 .footer-wave-wrap {

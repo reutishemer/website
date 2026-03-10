@@ -251,12 +251,16 @@ function initProductsPage() {
     o.id = 'viewModal';
     o.style.cssText = `position:fixed;inset:0;background:rgba(10,20,30,0.85);backdrop-filter:blur(6px);z-index:4000;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;transition:opacity 0.25s ease;`;
     o.innerHTML = `
-      <div style="background:#fff;border-radius:1.75rem;width:min(900px,95vw);max-height:92vh;overflow-y:auto;position:relative;padding:2rem;direction:rtl;transform:scale(0.96);transition:transform 0.25s ease;">
-        <button id="closeViewModal" style="position:absolute;top:1rem;right:1rem;background:#f3f5f8;border:none;border-radius:50%;width:2.4rem;height:2.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:background 0.2s;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a3a4a" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-        <p style="font-size:0.72rem;font-weight:900;color:#94a3b8;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.35rem;">${product.type} · ${product.unit}</p>
-        <h2 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:900;color:#1a3a4a;margin-bottom:1.25rem;line-height:1.2;">${product.title}</h2>
+      <div style="background:#000000;border-radius:1.75rem;width:min(900px,95vw);max-height:92vh;overflow-y:auto;position:relative;padding:2rem;direction:rtl;transform:scale(0.96);transition:transform 0.25s ease;">
+       <div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.25rem;">
+          <button id="closeViewModal" style="background:#2a2a2a;border:none;border-radius:50%;width:2.4rem;height:2.4rem;min-width:2.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+          <div>
+            <p style="font-size:0.72rem;font-weight:900;color:#94a3b8;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.35rem;">${product.type} · ${product.unit}</p>
+            <h2 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:900;color:#ffffff;line-height:1.2;">${product.title}</h2>
+          </div>
+        </div>
         <div style="text-align:center;">${mediaHtml}</div>
       </div>`;
     document.body.appendChild(o);
@@ -430,15 +434,15 @@ function initGlobalNav() {
 
   function showWelcome(username, modal) {
     const content = modal.querySelector('.modal-content');
-    content.innerHTML = `
+   content.innerHTML = `
       <div style="text-align:center; padding:0.5rem 0; position:relative;">
-        <button id="closeWelcome" style="position:absolute;top:-0.5rem;left:-0.5rem;background:none;border:none;cursor:pointer;color:#94a3b8;font-size:1.3rem;line-height:1;padding:0.25rem;">✕</button>
-        <h3 style="font-size:1.4rem;font-weight:900;color:#1a3a4a;margin-bottom:0.4rem;">ברוך הבא!</h3>
-        <p style="color:#64748b;font-weight:700;font-size:1rem;margin-bottom:1.5rem;">${username}</p>
+        <button id="closeWelcome" style="position:absolute;top:-0.5rem;left:-0.5rem;background:none;border:none;cursor:pointer;color:#666;font-size:1.3rem;line-height:1;padding:0.25rem;">✕</button>
+        <h3 style="font-size:1.4rem;font-weight:900;color:#ffffff;margin-bottom:0.4rem;">ברוך הבא!</h3>
+        <p style="color:#94a3b8;font-weight:700;font-size:1rem;margin-bottom:1.5rem;">${username}</p>
         <button id="goToAdmin" style="background:#1a3a4a;color:#fff;border:none;border-radius:0.85rem;padding:0.75rem 2rem;font-family:'Assistant',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;width:100%;transition:background 0.2s;margin-bottom:0.6rem;">
           כניסה לממשק ניהול ←
         </button>
-        <button id="logoutFromWelcome" style="background:none;border:1.5px solid #e2e8f0;border-radius:0.85rem;padding:0.65rem 2rem;font-family:'Assistant',sans-serif;font-weight:900;font-size:0.95rem;color:#64748b;cursor:pointer;width:100%;transition:border-color 0.2s,color 0.2s;">
+        <button id="logoutFromWelcome" style="background:none;border:1.5px solid rgba(255,255,255,0.12);border-radius:0.85rem;padding:0.65rem 2rem;font-family:'Assistant',sans-serif;font-weight:900;font-size:0.95rem;color:#ffffff;cursor:pointer;width:100%;">
           התנתקות
         </button>
       </div>`;
@@ -458,7 +462,7 @@ function initGlobalNav() {
     content.innerHTML = `
       <div style="text-align:center;padding:0.5rem 0;position:relative;">
         <button id="closeAdminPopup" style="position:absolute;top:-0.5rem;left:-0.5rem;background:none;border:none;cursor:pointer;color:#94a3b8;font-size:1.3rem;line-height:1;padding:0.25rem;">✕</button>
-        <h3 style="font-size:1.4rem;font-weight:900;color:#1a3a4a;margin-bottom:0.4rem;">שלום,</h3>
+        <h3 style="font-size:1.4rem;font-weight:900;color:#ffffff;margin-bottom:0.4rem;">שלום,</h3>
         <p style="color:#64748b;font-weight:700;font-size:1rem;margin-bottom:1.5rem;">${username}</p>
         <button id="logoutBtn" style="background:#ff4d4d;color:#fff;border:none;border-radius:0.85rem;padding:0.75rem 2rem;font-family:'Assistant',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;width:100%;transition:background 0.2s;">
           התנתקות
