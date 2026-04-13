@@ -634,3 +634,25 @@ html, body {
     color: black; 
 }
 
+
+.admin-footer-link {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.25);
+    font-family: 'Assistant', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-right: 0rem;
+    margin-: 0rem;
+    transition: color 0.2s ease;
+    vertical-align: middle;
+    padding: 0px;
+    margin-top: 0.8rem;
+
+}
+
+.admin-footer-link:hover {
+  color: rgba(255,255,255,0.5);
+}
+
