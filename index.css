@@ -236,9 +236,9 @@ html, body {
 .categories-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 7rem;
+  gap: -15rem;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .category-card {
@@ -274,14 +274,17 @@ html, body {
   height: 100%;
   object-fit: cover;
   transition: transform 0.9s ease;
+  object-position: center;
+  transform: scale(1.15);   /* זוםאין קבוע */
+  transition: transform 0.9s ease;
 }
 
-.category-card:hover .category-img-wrap img { transform: scale(1.1); }
+.category-card:hover .category-img-wrap img { transform: scale(1.28); }
 
 .category-title {
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  font-weight: 900;
-  color: var(--text);
+  font-size: clamp(1.5rem, 2vw, 1.6rem);
+  font-weight: 700;
+  color: var( --white);
 }
 
 .category-desc {
@@ -638,13 +641,14 @@ html, body {
 .admin-footer-link {
     background: none;
     border: none;
-    color: rgba(255,255,255,0.25);
+    color: var(--white);
+    text-decoration-line: underline;
     font-family: 'Assistant', sans-serif;
     font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
     margin-right: 0rem;
-    margin-: 0rem;
+    margin: 0rem;
     transition: color 0.2s ease;
     vertical-align: middle;
     padding: 0px;

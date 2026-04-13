@@ -187,10 +187,8 @@ html, body {
   right: 0.9rem;
   top: 50%;
   transform: translateY(-50%);
-
   width: 17px;
   height: 17px;
-
   opacity: 0.55;
 }
 .search-input {
@@ -1319,13 +1317,14 @@ body.scrolled .filter-bar-inner{
 .admin-footer-link {
     background: none;
     border: none;
-    color: rgba(255,255,255,0.25);
+    color: #cfcaca;
+    text-decoration-line: underline;
     font-family: 'Assistant', sans-serif;
     font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
     margin-right: 0rem;
-    margin-: 0rem;
+    margin: 0rem;
     transition: color 0.2s ease;
     vertical-align: middle;
     padding: 0px;
