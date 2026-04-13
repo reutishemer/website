@@ -9,8 +9,8 @@
 ───────────────────────────────────────── */
 const PRODUCTS = [
   // Movies
-  { id: 'm1', category: 'movies',    title: 'חיסול הטרור',     unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: 'https://picsum.photos/id/1/600/400' },
-  { id: 'm2', category: 'movies',    title: 'חיבוק ברזל',      unit: 'פיקוד העורף',  type: 'סרט',      imageUrl: 'https://picsum.photos/id/2/600/400' },
+  { id: 'm1', category: 'movies',    title: 'חיסול הטרור',     unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: '...\assets\newPhotos\0LXjbadJDmwxmzUseYdKvK3qRHjSL5fNvz3Dq5KWAomD6haUPx6O6QVLj7pqg0JHvvUabETanpiogPgBlwzTKzJ4c6C1-oHwTqSNrLbMuUk4bbjc_SUznkEDxQdfAEn-7pf11UW6Wnfp1r4VsPiEMOXVJYr53mZ0QopaJhYrpHfR2UDctMLAyInEy5a7ytCv.jfif.jpeg'},
+  { id: 'm2', category: 'movies',    title: 'חיבוק ברזל',      unit: 'פיקוד העורף',  type: 'סרט',      imageUrl: '..\assets\newPhotos\BpnZZ4bHEeuckP0yF5Ud3ZGs4FLl2OLmYUL1MdllnrlinZTgplAJFnXXp8NaW8ftXgE4i1IR7qxd0dypzDAUx3RHGFhVaJHbPTzNN72QjtGl5PDuJMTKRHmqTaNIKOqTwqg0nIQ7oEaP-2f2Bj69PdMHIRiiP0AyAyf8Eq8yYgR7ASDgD_uimoehz8tsy22m.jfif.jpeg' },
   { id: 'm3', category: 'movies',    title: 'מבצע שלום',        unit: 'יהל"ם',        type: 'תיעוד',    imageUrl: 'https://picsum.photos/id/3/600/400' },
   { id: 'm4', category: 'movies',    title: 'כנפי האש',         unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: 'https://picsum.photos/id/4/600/400' },
   { id: 'm5', category: 'movies',    title: 'שחר חדש',          unit: 'אג"מ',          type: 'תיעוד',    imageUrl: 'https://picsum.photos/id/5/600/400' },

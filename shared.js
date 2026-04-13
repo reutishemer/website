@@ -9,21 +9,24 @@
 ───────────────────────────────────────── */
 let PRODUCTS = [
   // Movies
-  { id: 'm1', category: 'movies',    title: 'חיסול הטרור',     unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: 'https://picsum.photos/id/1/600/400', fileUrl: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-  { id: 'm2', category: 'movies',    title: 'חיבוק ברזל',      unit: 'פיקוד העורף',  type: 'סרט',      imageUrl: 'https://picsum.photos/id/2/600/400' },
-  { id: 'm3', category: 'movies',    title: 'מבצע שלום',        unit: 'יהל"ם',        type: 'תיעוד',    imageUrl: 'https://picsum.photos/id/3/600/400' },
-  { id: 'm4', category: 'movies',    title: 'כנפי האש',         unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: 'https://picsum.photos/id/4/600/400' },
-  { id: 'm5', category: 'movies',    title: 'שחר חדש',          unit: 'אג"מ',          type: 'תיעוד',    imageUrl: 'https://picsum.photos/id/5/600/400' },
+  { id: 'm1', category: 'movies',    title: 'חיסול הטרור',     unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: '../assets/newPhotos/animation/singing.jpeg', fileUrl: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+  { id: 'm2', category: 'movies',    title: 'חיבוק ברזל',      unit: 'פיקוד העורף',  type: 'סרט',      imageUrl: '../assets/newPhotos/movies/musicMovies.jpeg' },
+  { id: 'm3', category: 'movies',    title: 'מבצע שלום',        unit: 'יהל"ם',        type: 'תיעוד',    imageUrl: '../assets/newPhotos/movies/photograther.jpeg' },
+  { id: 'm4', category: 'movies',    title: 'כנפי האש',         unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: '..//assets/newPhotos/movies/adler.jpeg' },
+  { id: 'm5', category: 'movies',    title: 'שחר חדש',          unit: 'אג"מ',          type: 'תיעוד',    imageUrl: '../assets/newPhotos/movies/asafandYaahav.jpeg' },
   // Animation
-  { id: 'a1', category: 'animation', title: 'הנפשה מונעת',      unit: 'חיל הקשר',     type: 'דו-מימד',  imageUrl: 'https://picsum.photos/id/10/600/400' },
-  { id: 'a2', category: 'animation', title: 'סטיץ במדבר',       unit: 'אג"מ',          type: 'תלת-מימד', imageUrl: 'https://picsum.photos/id/11/600/400' },
-  { id: 'a3', category: 'animation', title: 'מיקי הגה',          unit: 'חיל הים',      type: 'קלאסי',    imageUrl: 'https://picsum.photos/id/12/600/400' },
-  { id: 'a4', category: 'animation', title: 'רובוטים ואנשים',   unit: 'מערך ההדרכה',  type: 'דו-מימד',  imageUrl: 'https://picsum.photos/id/13/600/400' },
+  { id: 'a1', category: 'animation', title: 'הנפשה מונעת',      unit: 'חיל הקשר',     type: 'דו-מימד',  imageUrl: '../assets/newPhotos/animation/poster.jpeg'},
+  { id: 'a2', category: 'animation', title: 'סטיץ במדבר',       unit: 'אג"מ',          type: 'תלת-מימד', imageUrl: '../assets/newPhotos/animation/animation.jpeg'},
+  { id: 'a3', category: 'animation', title: 'מיקי הגה',          unit: 'חיל הים',      type: 'קלאסי',    imageUrl: '../assets/newPhotos/grafics/grafica.jpeg'},
+  { id: 'a4', category: 'animation', title: 'רובוטים ואנשים',   unit: 'מערך ההדרכה',  type: 'דו-מימד',  imageUrl: '../assets/newPhotos/grafics/grafics.jpeg'},
   // Graphics
-  { id: 'g1', category: 'graphics',  title: 'צבעוניות מופשטת', unit: 'מערך ההדרכה',  type: 'פוסטר',    imageUrl: 'https://picsum.photos/id/20/600/400' },
-  { id: 'g2', category: 'graphics',  title: 'מיתוג יחידה',      unit: 'חיל האוויר',   type: 'לוגו',     imageUrl: 'https://picsum.photos/id/21/600/400' },
-  { id: 'g3', category: 'graphics',  title: 'ממשק שליטה',       unit: 'תקשוב',        type: 'UX/UI',    imageUrl: 'https://picsum.photos/id/22/600/400' },
-  { id: 'g4', category: 'graphics',  title: 'מדריך מותג',       unit: 'אג"מ',          type: 'פוסטר',    imageUrl: 'https://picsum.photos/id/23/600/400' },
+  { id: 'g1', category: 'graphics',  title: 'צבעוניות מופשטת', unit: 'מערך ההדרכה',  type: 'פוסטר',    imageUrl: '../assets/newPhotos/animation/aiLogo.jpeg' },
+  { id: 'g2', category: 'graphics',  title: 'מיתוג יחידה',      unit: 'חיל האוויר',   type: 'לוגו',     imageUrl: '../assets/newPhotos/grafics/grafics.jpeg'},
+  { id: 'g3', category: 'graphics',  title: 'ממשק שליטה',       unit: 'תקשוב',        type: 'UX/UI',    imageUrl: '../assets/newPhotos/grafics/uiKit.jpeg'},
+  { id: 'g4', category: 'graphics',  title: 'מדריך מותג',       unit: 'אג"מ',          type: 'פוסטר',    imageUrl: '../assets/newPhotos/grafics/grafica.jpeg' },
+  // AI
+  { id: 'ai1', category: 'ai', title: 'תלת מימד', unit: 'מערך האוויר', type: 'AI', imageUrl: '../assets/newPhotos/animation/aiLogo.jpeg' },
+  { id: 'ai2', category: 'ai', title: 'סרטון AI', unit: 'תקשוב', type: 'AI', imageUrl: '../assets/newPhotos/grafics/grafica.jpeg' },
 ];
 
 const IAF_LOGO = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/IAF_logo.svg/1024px-IAF_logo.svg.png';
@@ -97,6 +100,7 @@ function initProductsPage() {
   const gridMovies    = document.getElementById('grid-movies');
   const gridAnimation = document.getElementById('grid-animation');
   const gridGraphics  = document.getElementById('grid-graphics');
+  const gridAi        = document.getElementById('grid-ai');    
   if (!gridMovies) return; // לא בעמוד תוצרים
 
   const searchInput   = document.getElementById('searchInput');
@@ -164,6 +168,7 @@ function initProductsPage() {
       movies:    gridMovies,
       animation: gridAnimation,
       graphics:  gridGraphics,
+      ai:        gridAi,    
     };
 
     Object.entries(grids).forEach(([cat, grid]) => {
@@ -301,7 +306,8 @@ function initProductsPage() {
     document.getElementById('section-movies'),
     document.getElementById('section-animation'),
     document.getElementById('section-graphics'),
-  ];
+    document.getElementById('section-ai'),
+];
 
   const scrollObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
