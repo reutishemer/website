@@ -656,3 +656,116 @@ html, body {
   color: rgba(255,255,255,0.5);
 }
 
+
+
+/* ═══════════════════════════════
+   POSTERS CAROUSEL
+═══════════════════════════════ */
+.posters-section {
+  background: #111111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 0 6rem;
+  overflow: hidden;
+}
+
+.posters-title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 3rem;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0;
+}
+
+.carousel-track-outer {
+  overflow: hidden;
+  flex: 1;
+  mask-image: linear-gradient(to left, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1.2rem;
+  padding: 1rem 0.5rem;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.poster-card {
+  flex: 0 0 220px;
+  height: 310px;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  position: relative;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  background: #1a1a1a;
+  transition: transform 0.35s ease, border-color 0.35s ease;
+}
+
+.poster-card.active {
+  transform: scale(1.04);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.poster-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.9s ease;
+}
+
+.poster-card:hover img { transform: scale(1.06); }
+
+.poster-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 55%);
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.poster-card.active .poster-overlay { opacity: 1; }
+
+.poster-overlay span {
+  color: #fff;
+  font-family: 'Assistant', sans-serif;
+  font-weight: 900;
+  font-size: 0.95rem;
+}
+
+.carousel-arrow {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+  width: 3rem;
+  margin: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.carousel-arrow:hover {
+  color: rgba(255, 255, 255, 0.95);
+  transform: scale(1.2);
+}

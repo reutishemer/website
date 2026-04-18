@@ -58,6 +58,109 @@ function initScrollChevron() {
   });
 }
 
+
+
+/* ─────────────────────────────────────────
+   HOME — Posters Carousel
+───────────────────────────────────────── */
+function initPostersCarousel() {
+  const track = document.getElementById('carouselTrack');
+  if (!track) return;
+
+  const CARD_W = 220;
+  const GAP = 19.2;
+  const STEP = CARD_W + GAP;
+
+  const POSTERS = [
+    { title: 'מבצע שחר',       img: '../assets/posters/פוסטרים דוגמאות/166.png' },
+    { title: 'כנפי האש',       img: '../assets/posters/פוסטרים דוגמאות/bhh8.png' },
+    { title: 'לב האריה',       img: '../assets/posters/פוסטרים דוגמאות/moviePoster.png' },
+    { title: 'רוח מדבר',       img: '../assets/posters/פוסטרים דוגמאות/yanshuf.png' },
+    { title: 'שמי הצפון',      img: '../assets/posters/פוסטרים דוגמאות/moviePoster.png' },
+    { title: 'גיבורי הסדרים',  img: '../assets/posters/פוסטרים דוגמאות/166.png' },
+    { title: 'גבול הברזל',     img: '../assets/posters/פוסטרים דוגמאות/moviePoster.png' },
+    { title: 'קול הסערה',      img: '../assets/posters/פוסטרים דוגמאות/bhh8.png' },
+  ];
+
+  const n = POSTERS.length;
+
+  // בונים: עותק סוף | מקוריים | עותק התחלה
+  const extended = [
+    ...POSTERS.slice(-3),
+    ...POSTERS,
+    ...POSTERS.slice(0, 3),
+  ];
+
+  extended.forEach((p, i) => {
+    const realIndex = i - 3;
+    const card = document.createElement('div');
+    card.className = 'poster-card' + (realIndex === 0 ? ' active' : '');
+    card.dataset.real = realIndex;
+    card.innerHTML = `
+      <img src="${p.img}" alt="${p.title}" loading="lazy"
+           onerror="this.src='https://picsum.photos/id/${20 + ((realIndex % n + n) % n)}/300/420'" />
+      <div class="poster-overlay"><span>${p.title}</span></div>`;
+    card.addEventListener('click', () => goTo(realIndex));
+    track.appendChild(card);
+  });
+
+  let current = 0;
+  let isJumping = false;
+
+  function updateActive() {
+    document.querySelectorAll('.poster-card').forEach(c => {
+      c.classList.toggle('active', parseInt(c.dataset.real) === current);
+    });
+  }
+
+  function goTo(index) {
+    if (isJumping) return;
+    current = index;
+    const visualIndex = current + 3;
+    track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+    track.style.transform = `translateX(${visualIndex * STEP}px)`;
+    updateActive();
+
+    // אחרי האנימציה — בדוק אם צריך לקפוץ
+    track.addEventListener('transitionend', function onEnd() {
+      track.removeEventListener('transitionend', onEnd);
+
+      if (current >= n) {
+        isJumping = true;
+        current = current - n;
+        track.style.transition = 'none';
+        track.style.transform = `translateX(${(current + 3) * STEP}px)`;
+        updateActive();
+        requestAnimationFrame(() => { isJumping = false; });
+      } else if (current < 0) {
+        isJumping = true;
+        current = current + n;
+        track.style.transition = 'none';
+        track.style.transform = `translateX(${(current + 3) * STEP}px)`;
+        updateActive();
+        requestAnimationFrame(() => { isJumping = false; });
+      }
+    });
+  }
+
+  // מיקום התחלתי בלי אנימציה
+  track.style.transition = 'none';
+  track.style.transform = `translateX(${3 * STEP}px)`;
+
+  document.getElementById('arrowRight')
+    ?.addEventListener('click', () => goTo(current - 1));
+  document.getElementById('arrowLeft')
+    ?.addEventListener('click', () => goTo(current + 1));
+
+  let startX = 0;
+  track.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) goTo(dx > 0 ? current - 1 : current + 1);
+  });
+}
 /* ─────────────────────────────────────────
    path in homePage
 ───────────────────────────────────────── */
@@ -341,6 +444,7 @@ function initProductsPage() {
 document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initScrollChevron();
+  initPostersCarousel();
   initGlobalNav();
   initProductsPage();
 });
