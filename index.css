@@ -457,13 +457,12 @@ html, body {
 /* זה מה שבאמת מעצב את האימייל לא הכיתה שלמעלה*/
 /*קישור לא עובד בגלל אבטחה בשרת אמיתי אמור לעבוד*/
 .__cf_email__ {
-  color: rgba(255,255,255,0.4); 
-  font-size: clamp(1rem,2vw,1.4rem); 
+  color: rgba(255,255,255,0.85);
+  font-size: clamp(1.3rem,2.5vw,1.8rem);
   font-weight: 700;
   text-decoration: none !important;
   display: block;
 }
-
 
 .footer-logo { 
   flex-shrink: 0; 
@@ -641,7 +640,7 @@ html, body {
 .admin-footer-link {
     background: none;
     border: none;
-    color: var(--white);
+    color: rgba(255,255,255,0.3);
     text-decoration-line: underline;
     font-family: 'Assistant', sans-serif;
     font-size: 1rem;

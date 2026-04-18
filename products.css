@@ -1278,10 +1278,9 @@ body.scrolled .filter-bar-inner{
 }
 
 
-
 .__cf_email__ {
-  color: rgba(255,255,255,0.4); 
-  font-size: clamp(1rem,2vw,1.4rem); 
+  color: rgba(255,255,255,0.85);
+  font-size: clamp(1.3rem,2.5vw,1.8rem);
   font-weight: 700;
   text-decoration: none !important;
   display: block;
@@ -1317,7 +1316,7 @@ body.scrolled .filter-bar-inner{
 .admin-footer-link {
     background: none;
     border: none;
-    color: #cfcaca;
+    color: rgba(255,255,255,0.3);
     text-decoration-line: underline;
     font-family: 'Assistant', sans-serif;
     font-size: 1rem;
