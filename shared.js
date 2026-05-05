@@ -6,28 +6,10 @@
 
 /* ─────────────────────────────────────────
    DATA
+   הנתונים נטענים מ-SharePoint בטעינת הדף.
+   המערך הזה משמש כ-cache מקומי.
 ───────────────────────────────────────── */
-let PRODUCTS = [
-  // Movies
-  { id: 'm1', category: 'movies',    title: 'חיסול הטרור',     unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: '../assets/newPhotos/animation/singing.jpeg', fileUrl: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-  { id: 'm2', category: 'movies',    title: 'חיבוק ברזל',      unit: 'פיקוד העורף',  type: 'סרט',      imageUrl: '../assets/newPhotos/movies/musicMovies.jpeg' },
-  { id: 'm3', category: 'movies',    title: 'מבצע שלום',        unit: 'יהל"ם',        type: 'תיעוד',    imageUrl: '../assets/newPhotos/movies/photograther.jpeg' },
-  { id: 'm4', category: 'movies',    title: 'כנפי האש',         unit: 'חיל האוויר',   type: 'סרטון',    imageUrl: '..//assets/newPhotos/movies/adler.jpeg' },
-  { id: 'm5', category: 'movies',    title: 'שחר חדש',          unit: 'אג"מ',          type: 'תיעוד',    imageUrl: '../assets/newPhotos/movies/asafandYaahav.jpeg' },
-  // Animation
-  { id: 'a1', category: 'animation', title: 'הנפשה מונעת',      unit: 'חיל הקשר',     type: 'דו-מימד',  imageUrl: '../assets/newPhotos/animation/poster.jpeg'},
-  { id: 'a2', category: 'animation', title: 'סטיץ במדבר',       unit: 'אג"מ',          type: 'תלת-מימד', imageUrl: '../assets/newPhotos/animation/animation.jpeg'},
-  { id: 'a3', category: 'animation', title: 'מיקי הגה',          unit: 'חיל הים',      type: 'קלאסי',    imageUrl: '../assets/newPhotos/grafics/grafica.jpeg'},
-  { id: 'a4', category: 'animation', title: 'רובוטים ואנשים',   unit: 'מערך ההדרכה',  type: 'דו-מימד',  imageUrl: '../assets/newPhotos/grafics/grafics.jpeg'},
-  // Graphics
-  { id: 'g1', category: 'graphics',  title: 'צבעוניות מופשטת', unit: 'מערך ההדרכה',  type: 'פוסטר',    imageUrl: '../assets/newPhotos/animation/aiLogo.jpeg' },
-  { id: 'g2', category: 'graphics',  title: 'מיתוג יחידה',      unit: 'חיל האוויר',   type: 'לוגו',     imageUrl: '../assets/newPhotos/grafics/grafics.jpeg'},
-  { id: 'g3', category: 'graphics',  title: 'ממשק שליטה',       unit: 'תקשוב',        type: 'UX/UI',    imageUrl: '../assets/newPhotos/grafics/uiKit.jpeg'},
-  { id: 'g4', category: 'graphics',  title: 'מדריך מותג',       unit: 'אג"מ',          type: 'פוסטר',    imageUrl: '../assets/newPhotos/grafics/grafica.jpeg' },
-  // AI
-  { id: 'ai1', category: 'ai', title: 'תלת מימד', unit: 'מערך האוויר', type: 'AI', imageUrl: '../assets/newPhotos/animation/aiLogo.jpeg' },
-  { id: 'ai2', category: 'ai', title: 'סרטון AI', unit: 'תקשוב', type: 'AI', imageUrl: '../assets/newPhotos/grafics/grafica.jpeg' },
-];
+let PRODUCTS = [];
 
 const IAF_LOGO = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/IAF_logo.svg/1024px-IAF_logo.svg.png';
 
@@ -53,12 +35,10 @@ function initScrollChevron() {
   if (!chevron) return;
   chevron.addEventListener('click', () => {
     const container = document.querySelector('.scroll-snap-container');
-    const target    = document.querySelector('.categories-section'); // ← שינוי כאן
+    const target    = document.querySelector('.categories-section');
     if (container && target) container.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
   });
 }
-
-
 
 /* ─────────────────────────────────────────
    HOME — Posters Carousel
@@ -84,7 +64,6 @@ function initPostersCarousel() {
 
   const n = POSTERS.length;
 
-  // בונים: עותק סוף | מקוריים | עותק התחלה
   const extended = [
     ...POSTERS.slice(-3),
     ...POSTERS,
@@ -121,7 +100,6 @@ function initPostersCarousel() {
     track.style.transform = `translateX(${visualIndex * STEP}px)`;
     updateActive();
 
-    // אחרי האנימציה — בדוק אם צריך לקפוץ
     track.addEventListener('transitionend', function onEnd() {
       track.removeEventListener('transitionend', onEnd);
 
@@ -143,7 +121,6 @@ function initPostersCarousel() {
     });
   }
 
-  // מיקום התחלתי בלי אנימציה
   track.style.transition = 'none';
   track.style.transform = `translateX(${3 * STEP}px)`;
 
@@ -161,6 +138,7 @@ function initPostersCarousel() {
     if (Math.abs(dx) > 40) goTo(dx > 0 ? current - 1 : current + 1);
   });
 }
+
 /* ─────────────────────────────────────────
    path in homePage
 ───────────────────────────────────────── */
@@ -193,18 +171,43 @@ function drawMagicPath() {
 }
 
 window.addEventListener('load', drawMagicPath);
-window.addEventListener('resize', drawMagicPath);
+
+// debounce על resize — לא מריץ את הפונקציה בכל פריים
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(drawMagicPath, 150);
+});
 
 
 /* ─────────────────────────────────────────
    PRODUCTS PAGE
+   
+   השינוי המרכזי: הפונקציה עכשיו async
+   ומתחילה בטעינת נתונים מ-SharePoint.
 ───────────────────────────────────────── */
-function initProductsPage() {
+async function initProductsPage() {
   const gridMovies    = document.getElementById('grid-movies');
   const gridAnimation = document.getElementById('grid-animation');
   const gridGraphics  = document.getElementById('grid-graphics');
-  const gridAi        = document.getElementById('grid-ai');    
+  const gridAi        = document.getElementById('grid-ai');
   if (!gridMovies) return; // לא בעמוד תוצרים
+
+  /* ── טעינת נתונים מ-SharePoint ── 
+     מנסה לטעון מ-SharePoint.
+     אם נכשל — ממשיך עם PRODUCTS הסטטי שהיה קיים.
+  */
+  try {
+    const spItems = await getItemsFromSP();
+    if (spItems.length > 0) {
+      PRODUCTS = spItems;
+      console.log(`[SharePoint] נטענו ${spItems.length} תוצרים`);
+    } else {
+      console.warn('[SharePoint] לא נמצאו תוצרים, ממשיך עם נתונים מקומיים');
+    }
+  } catch (err) {
+    console.error('[SharePoint] שגיאה בטעינה, ממשיך עם נתונים מקומיים:', err);
+  }
 
   const searchInput   = document.getElementById('searchInput');
   const filterCount   = document.getElementById('filterCount');
@@ -217,11 +220,9 @@ function initProductsPage() {
   const filterClear   = document.getElementById('filterClear');
   const filterOptBtns = document.querySelectorAll('.fopt');
 
-  // כל הסוגים מסומנים כברירת מחדל
   let selectedFilters = new Set(Array.from(filterOptBtns).map(b => b.dataset.filter));
   let searchTerm = '';
 
-  /* ── עדכון תווית הדרופדאון ── */
   function updateTriggerLabel() {
     if (!filterTriggerText) return;
     filterTriggerText.textContent =
@@ -229,7 +230,6 @@ function initProductsPage() {
       selectedFilters.size === 0 ? 'ללא' : `נבחרו ${selectedFilters.size}`;
   }
 
-  /* ── פתיחה/סגירה של הפאנל ── */
   if (filterTrigger && filterPanel) {
     filterTrigger.addEventListener('click', e => {
       e.stopPropagation();
@@ -241,7 +241,6 @@ function initProductsPage() {
     filterPanel.addEventListener('click', e => e.stopPropagation());
   }
 
-  /* ── לחיצה על אפשרות סינון ── */
   filterOptBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const f = btn.dataset.filter;
@@ -253,7 +252,6 @@ function initProductsPage() {
     });
   });
 
-  /* ── נקה סינון ── */
   if (filterClear) {
     filterClear.addEventListener('click', () => {
       filterOptBtns.forEach(b => { selectedFilters.add(b.dataset.filter); b.classList.add('active'); });
@@ -262,7 +260,6 @@ function initProductsPage() {
     });
   }
 
-  /* ── Render all grids ── */
   function render() {
     const q = searchTerm.toLowerCase();
     let total = 0;
@@ -271,7 +268,7 @@ function initProductsPage() {
       movies:    gridMovies,
       animation: gridAnimation,
       graphics:  gridGraphics,
-      ai:        gridAi,    
+      ai:        gridAi,
     };
 
     Object.entries(grids).forEach(([cat, grid]) => {
@@ -297,7 +294,6 @@ function initProductsPage() {
     emptyState.classList.toggle('hidden', total > 0);
   }
 
-  /* ── Build product card ── */
   function createCard(product, index) {
     const card = document.createElement('div');
     card.className = 'product-card';
@@ -325,18 +321,14 @@ function initProductsPage() {
         </div>
       </div>
     `;
-    // לחיצה על כפתור צפייה
     card.querySelector('.card-view-btn').addEventListener('click', e => {
       e.stopPropagation();
       openViewModal(product);
     });
-    // לחיצה על הכרטיס עצמו
     card.addEventListener('click', () => openViewModal(product));
-
     return card;
   }
 
-  /* ── View Modal ── */
   function openViewModal(product) {
     const isVideo = product.fileUrl && /\.(mp4|mov|avi|webm)$/i.test(product.fileUrl);
     const isPoster = ['פוסטר','לוגו','UX/UI','דו-מימד','תלת-מימד','קלאסי'].includes(product.type);
@@ -389,13 +381,11 @@ function initProductsPage() {
     });
   }
 
-  /* ── Search ── */
   if (searchInput) searchInput.addEventListener('input', e => {
     searchTerm = e.target.value;
     render();
   });
 
-  /* ── Clear empty state btn ── */
   if (clearBtn) clearBtn.addEventListener('click', () => {
     searchTerm = '';
     if (searchInput) searchInput.value = '';
@@ -404,13 +394,12 @@ function initProductsPage() {
     render();
   });
 
-  /* ── Highlight active jump link on scroll ── */
   const sections = [
     document.getElementById('section-movies'),
     document.getElementById('section-animation'),
     document.getElementById('section-graphics'),
     document.getElementById('section-ai'),
-];
+  ];
 
   const scrollObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -425,7 +414,6 @@ function initProductsPage() {
 
   sections.forEach(s => { if (s) scrollObserver.observe(s); });
 
-  /* ── Scroll to hash on load (e.g. products.html#section-animation) ── */
   if (window.location.hash) {
     setTimeout(() => {
       const target = document.querySelector(window.location.hash);
@@ -433,7 +421,6 @@ function initProductsPage() {
     }, 150);
   }
 
-  /* ── Init ── */
   render();
   initAdminTools(render);
 }
@@ -451,7 +438,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ─────────────────────────────────────────
    PRODUCTS PAGE — Logo scroll into filter bar
-   מופעל רק בעמוד תוצרים
 ───────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   const hero = document.querySelector('.products-hero');
@@ -460,7 +446,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let ticking = false;
 
   function toggleScrolled() {
-    // עובר למצב scrolled כשתחתית הגיבור עוברת מעבר לחלון
     const heroBottom = hero.getBoundingClientRect().bottom;
     document.body.classList.toggle('scrolled', heroBottom <= 0);
     ticking = false;
@@ -473,11 +458,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 
-  toggleScrolled(); // בדיקה ראשונית
+  toggleScrolled();
 });
 
 /* ─────────────────────────────────────────
-   ADMIN STATE — נשמר ב-sessionStorage בין דפים
+   ADMIN STATE
 ───────────────────────────────────────── */
 if (window.location.search.includes('admin=1')) {
   sessionStorage.setItem('isAdmin', '1');
@@ -485,16 +470,15 @@ if (window.location.search.includes('admin=1')) {
 let isAdmin = sessionStorage.getItem('isAdmin') === '1';
 
 /* ─────────────────────────────────────────
-   GLOBAL NAV — Login modal + contact + admin
+   GLOBAL NAV
 ───────────────────────────────────────── */
 function initGlobalNav() {
-  const loginBtn    = document.getElementById('adminLoginBtn');
-  const modal       = document.getElementById('loginModal');
+  const loginBtn      = document.getElementById('adminLoginBtn');
+  const modal         = document.getElementById('loginModal');
   const closeModalBtn = document.getElementById('closeModal');
-  const doLogin     = document.getElementById('doLogin');
-  const contactLink = document.getElementById('contactLink');
+  const doLogin       = document.getElementById('doLogin');
+  const contactLink   = document.getElementById('contactLink');
 
-  // צור קשר — גלילה לפוטר
   if (contactLink) {
     contactLink.addEventListener('click', e => {
       e.preventDefault();
@@ -518,7 +502,6 @@ function initGlobalNav() {
   }
 
   function handleLogin() {
-    // אם כבר מחובר — הצג פופ-אפ "שלום"
     if (isAdmin) { showAlreadyLoggedIn(modal); return; }
 
     const user  = (document.getElementById('adminUser')?.value || '').trim();
@@ -544,7 +527,7 @@ function initGlobalNav() {
 
   function showWelcome(username, modal) {
     const content = modal.querySelector('.modal-content');
-   content.innerHTML = `
+    content.innerHTML = `
       <div style="text-align:center; padding:0.5rem 0; position:relative;">
         <button id="closeWelcome" style="position:absolute;top:-0.5rem;left:-0.5rem;background:none;border:none;cursor:pointer;color:#666;font-size:1.3rem;line-height:1;padding:0.25rem;">✕</button>
         <h3 style="font-size:1.4rem;font-weight:900;color:#ffffff;margin-bottom:0.4rem;">ברוך הבא!</h3>
@@ -589,11 +572,9 @@ function initGlobalNav() {
     sessionStorage.removeItem('isAdmin');
     sessionStorage.removeItem('adminUser');
     isAdmin = false;
-    // הסר כפתורי מנהל
     document.querySelector('.admin-fab')?.remove();
     document.querySelectorAll('.admin-card-btns').forEach(el => el.remove());
     document.body.classList.remove('admin-mode');
-    // אפס את תוכן הפופ-אפ חזרה לטופס כניסה
     const mc = document.querySelector('.modal-content');
     if (mc) {
       mc.innerHTML = `
@@ -605,7 +586,6 @@ function initGlobalNav() {
           <button id="doLogin">התחבר</button>
           <button id="closeModal">ביטול</button>
         </div>`;
-      // חבר מחדש את האזנות
       mc.querySelector('#doLogin').addEventListener('click', handleLogin);
       mc.querySelector('#closeModal').addEventListener('click', () => {
         modal.classList.remove('active'); clearForm();
@@ -629,7 +609,6 @@ function initGlobalNav() {
 function initAdminTools(renderFn) {
   if (!isAdmin) return;
 
-  // FAB +
   if (!document.querySelector('.admin-fab')) {
     const fab = document.createElement('button');
     fab.className = 'admin-fab';
@@ -639,7 +618,6 @@ function initAdminTools(renderFn) {
     document.body.appendChild(fab);
   }
 
-  // האזנה לכפתורים על הכרטיסים
   document.addEventListener('click', e => {
     const delBtn  = e.target.closest('.admin-btn--delete');
     const editBtn = e.target.closest('.admin-btn--edit');
@@ -687,9 +665,15 @@ function openDeleteModal(id, renderFn) {
       <button class="amodal-btn amodal-btn--danger" id="aConfirmDel">מחק</button>
       <button class="amodal-btn amodal-btn--cancel" id="aCancelDel">ביטול</button>
     </div>`);
-  m.querySelector('#aConfirmDel').addEventListener('click', () => {
+
+  m.querySelector('#aConfirmDel').addEventListener('click', async () => {
+    // מחיקה מ-SharePoint אם הפריט הגיע משם
+    if (product.spId) {
+      await deleteItemFromSP(product.spId);
+    }
     PRODUCTS.splice(PRODUCTS.findIndex(p => p.id === id), 1);
-    closeAModal(m); renderFn();
+    closeAModal(m);
+    renderFn();
   });
   m.querySelector('#aCancelDel').addEventListener('click', () => closeAModal(m));
 }
@@ -722,19 +706,28 @@ function openEditModal(id, renderFn) {
       <button class="amodal-btn amodal-btn--primary" id="aConfirmEdit">שמור</button>
       <button class="amodal-btn amodal-btn--cancel" id="aCancelEdit">ביטול</button>
     </div>`);
+
   m.querySelector('#aEditFile').addEventListener('change', function() {
     const r = new FileReader();
     r.onload = e => { newImg = e.target.result; m.querySelector('#aEditPreview').src = newImg; };
     r.readAsDataURL(this.files[0]);
   });
-  m.querySelector('#aConfirmEdit').addEventListener('click', () => {
+
+  m.querySelector('#aConfirmEdit').addEventListener('click', async () => {
     const idx = PRODUCTS.findIndex(p => p.id === id);
-    PRODUCTS[idx] = { ...PRODUCTS[idx],
-      title: m.querySelector('#aEditTitle').value.trim() || PRODUCTS[idx].title,
-      unit:  m.querySelector('#aEditUnit').value.trim()  || PRODUCTS[idx].unit,
-      type:  m.querySelector('#aEditType').value.trim()  || PRODUCTS[idx].type,
-      imageUrl: newImg };
-    closeAModal(m); renderFn();
+    PRODUCTS[idx] = {
+      ...PRODUCTS[idx],
+      title:    m.querySelector('#aEditTitle').value.trim() || PRODUCTS[idx].title,
+      unit:     m.querySelector('#aEditUnit').value.trim()  || PRODUCTS[idx].unit,
+      type:     m.querySelector('#aEditType').value.trim()  || PRODUCTS[idx].type,
+      imageUrl: newImg
+    };
+    // עדכון ב-SharePoint אם הפריט הגיע משם
+    if (PRODUCTS[idx].spId) {
+      await updateItemInSP(PRODUCTS[idx].spId, PRODUCTS[idx]);
+    }
+    closeAModal(m);
+    renderFn();
   });
   m.querySelector('#aCancelEdit').addEventListener('click', () => closeAModal(m));
 }
@@ -750,6 +743,7 @@ function openAddModal(renderFn) {
         <option value="movies">סרטים</option>
         <option value="animation">אנימציה</option>
         <option value="graphics">גרפיקה</option>
+        <option value="ai">AI</option>
       </select>
       <label class="amodal-label">סוג תוצר</label>
       <input class="amodal-input" id="aAddType" placeholder="סרטון, פוסטר, לוגו..." />
@@ -784,31 +778,57 @@ function openAddModal(renderFn) {
       <button class="amodal-btn amodal-btn--primary" id="aConfirmAdd">הוסף</button>
       <button class="amodal-btn amodal-btn--cancel" id="aCancelAdd">ביטול</button>
     </div>`);
+
   m.querySelector('#aAddFile').addEventListener('change', function() {
     const r = new FileReader();
     r.onload = e => { newImg = e.target.result; m.querySelector('#aAddPreview').src = newImg; };
     r.readAsDataURL(this.files[0]);
   });
+
   m.querySelector('#aAddProjectFile').addEventListener('change', function() {
     const file = this.files[0];
     if (!file) return;
     m.querySelector('#aAddProjectName').textContent = file.name;
     m.querySelector('#aAddProjectChip').classList.add('has-file');
   });
-  m.querySelector('#aConfirmAdd').addEventListener('click', () => {
+
+  m.querySelector('#aConfirmAdd').addEventListener('click', async () => {
     const title = m.querySelector('#aAddTitle').value.trim();
     const unit  = m.querySelector('#aAddUnit').value.trim();
     const type  = m.querySelector('#aAddType').value.trim();
     const cat   = m.querySelector('#aAddCat').value;
-    if (!title || !unit || !type) { m.querySelector('#aAddErr').style.display = 'block'; return; }
-    PRODUCTS.push({ id: 'p_' + Date.now(), category: cat, title, unit, type, imageUrl: newImg });
+    if (!title || !unit || !type) {
+      m.querySelector('#aAddErr').style.display = 'block';
+      return;
+    }
+
+    const newProduct = {
+      id:       'p_' + Date.now(), // ID זמני עד שמקבלים מ-SharePoint
+      category: cat,
+      title,
+      unit,
+      type,
+      imageUrl: newImg,
+      fileUrl:  null
+    };
+
+    // שמירה ב-SharePoint וקבלת ID אמיתי
+    const spId = await createItemInSP(newProduct);
+    if (spId) {
+      newProduct.id   = spId;
+      newProduct.spId = parseInt(spId.replace('sp_', ''));
+    }
+
+    PRODUCTS.push(newProduct);
     closeAModal(m);
     renderFn();
+
     setTimeout(() => {
       const sec = document.getElementById('section-' + cat);
       if (sec) sec.scrollIntoView({ behavior: 'smooth' });
     }, 100);
   });
+
   m.querySelector('#aCancelAdd').addEventListener('click', () => closeAModal(m));
 }
 
@@ -823,6 +843,7 @@ function createAModal(id, html) {
   o.addEventListener('click', e => { if (e.target === o) closeAModal(o); });
   return o;
 }
+
 function closeAModal(o) {
   o.classList.remove('amodal-visible');
   o.addEventListener('transitionend', () => o.remove(), { once: true });
