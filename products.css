@@ -16,6 +16,14 @@
   --topbar-h:    72px;
 }
 
+@font-face {
+  font-family: 'Assistant';
+  src: url('../assets/fonts/Assistant-bold.ttf') format('truetype');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -27,6 +35,7 @@ body {
   direction: rtl;
   min-height: 100vh;
 }
+
 
 .hidden { display: none !important; }
 

@@ -21,6 +21,14 @@
   --dot-color: rgba(255,255,255,0.07);
 }
 
+@font-face {
+  font-family: 'Assistant';
+  src: url('../assets/fonts/Assistant-bold.ttf') format('truetype');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 html, body {
   height: 100%;
   font-family: 'Assistant', sans-serif;
@@ -31,7 +39,6 @@ html, body {
   background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
   background-size: 1.75rem 1.75rem;
 }
-
 
 ::-webkit-scrollbar { width: 0.5vw; }
 ::-webkit-scrollbar-track { background: #edf0f4; }
