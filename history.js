@@ -10,6 +10,14 @@
 
   if (!track || !wrapper || !section || !stickyVP) return;
 
+  /* ─── INTERSECTION OBSERVER ─── */
+  let sectionVisible = false;
+  const observer = new IntersectionObserver(
+    ([entry]) => { sectionVisible = entry.isIntersecting; },
+    { threshold: 0.5 }
+  );
+  observer.observe(section);
+
   /* ─── LERP ─── */
   let current = 0;
   let target  = 0;
@@ -26,13 +34,17 @@
 
   /* ─── WHEEL ─── */
   section.addEventListener('wheel', (e) => {
+    if (!sectionVisible) return;
+
+    const NAV_TOP    = 16;
+   const NAV_BOTTOM = 112;
+   if (e.clientY >= NAV_TOP && e.clientY <= NAV_BOTTOM) return;
     const delta   = e.deltaY;
     const max     = getMaxScroll();
     const atStart = target <= 0 && delta < 0;
     const atEnd   = target >= max && delta > 0;
 
     if (atStart || atEnd) {
-      // הגלגלת מגיעה לקצה — מעבירים ל-scroll-snap-container
       if (snapCont) snapCont.scrollTop += delta;
       return;
     }
