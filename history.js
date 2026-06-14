@@ -151,4 +151,49 @@ const DETAILS = {
     updateActiveItem();
   });
 
+  /* ─── CONTACT LINK ─── */
+  const contactLink = document.getElementById('contactLink');
+  if (contactLink) {
+    contactLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const footer = document.querySelector('.site-footer');
+      if (footer) footer.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  /* ─── ADMIN MODAL ─── */
+  const modal      = document.getElementById('loginModal');
+  const adminBtn   = document.getElementById('adminLoginBtn');
+  const closeMdl   = document.getElementById('closeModal');
+  const doLogin    = document.getElementById('doLogin');
+  const loginError = document.getElementById('loginError');
+
+  if (adminBtn) adminBtn.addEventListener('click', () => modal.classList.add('active'));
+
+  if (closeMdl) closeMdl.addEventListener('click', () => {
+    modal.classList.remove('active');
+    if (loginError) { loginError.style.display = 'none'; loginError.textContent = ''; }
+  });
+
+  if (doLogin) {
+    doLogin.addEventListener('click', () => {
+      const user = document.getElementById('adminUser')?.value.trim();
+      const pass = document.getElementById('adminPass')?.value.trim();
+      if (user === 'admin' && pass === '1234') {
+        modal.classList.remove('active');
+        window.location.href = 'admin.html';
+      } else {
+        if (loginError) {
+          loginError.textContent = 'שם משתמש או סיסמה שגויים';
+          loginError.style.display = 'block';
+        }
+      }
+    });
+  }
+
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+  });
+
 })();
+
